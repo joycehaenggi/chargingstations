@@ -16,9 +16,11 @@ public class ChargingStationsApp extends Application {
 		Parent rootPanel = new RootPanel(rootPM);
 
 		Scene scene = new Scene(rootPanel);
-
+		primaryStage.setTitle("ChargingStationsFX");
 		primaryStage.titleProperty().bind(rootPM.applicationTitleProperty());
 		primaryStage.setScene(scene);
+
+
 
 		primaryStage.show();
 	}

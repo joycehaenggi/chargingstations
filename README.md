@@ -1,7 +1,7 @@
 # OOP2 Programmierprojekt FS19
 
 ## Bearbeitet von
- - Vorname Nachname
+ - Joyce Hänggi
 
 ## Abgabe
 - Mittwoch, 5.6.2019, 18:00 Uhr
