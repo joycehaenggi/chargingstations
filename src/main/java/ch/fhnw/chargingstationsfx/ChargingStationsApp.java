@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
-import ch.fhnw.chargingstationsfx.view.RootPanel;
+import ch.fhnw.chargingstationsfx.view.RootPanelUI;
 
 public class ChargingStationsApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
 		RootPM rootPM    = new RootPM();
-		Parent rootPanel = new RootPanel(rootPM);
+		Parent rootPanel = new RootPanelUI(rootPM);
 
 		Scene scene = new Scene(rootPanel);
 		primaryStage.setTitle("ChargingStationsFX");
