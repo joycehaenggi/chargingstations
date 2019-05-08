@@ -1,3 +1,27 @@
+* {
+    -button-size: 2em;
+}
+
 .root {
     -fx-padding: 20px;
+    -fx-spacing: 10px;
+
+}
+
+#button-save{
+    -fx-background-image: url("save.png");
+    -fx-min-width: -button-size;
+    -fx-min-height: -button-size;
+    -fx-max-width: -button-size;
+    -fx-max-height: -button-size;
+}
+
+#button-delete{
+    -fx-background-image:url("cancel.png");
+
+    -fx-background-repeat: no-repeat;
+    -fx-min-width: -button-size;
+    -fx-min-height: -button-size;
+    -fx-max-width: -button-size;
+    -fx-max-height: -button-size;
 }

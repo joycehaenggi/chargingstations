@@ -17,7 +17,6 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
         this.rootPM = model;
 
         init();
-        setupEventHandlers();
     }
 
     @Override

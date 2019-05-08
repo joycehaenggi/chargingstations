@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+
+
 public class LayoutRight extends GridPane {
         public Label titel;
         public Label strasse;
@@ -54,10 +56,6 @@ public class LayoutRight extends GridPane {
         public TextField power3KwTextField;
         public TextField plugType4TextField;
         public TextField power4KwTextField;
-
-
-
-
 
 
 
@@ -121,8 +119,10 @@ public class LayoutRight extends GridPane {
     }
 
     private void layoutControls() {
-        //Spalte wächst horizontal
-        //Spezielle Spalte darf nicht wachsen
+        setVgap(5);
+        setHgap(10);
+
+
         ColumnConstraints noGrow = new ColumnConstraints();
         noGrow.setHgrow(Priority.NEVER);
 
@@ -196,6 +196,7 @@ public class LayoutRight extends GridPane {
 
         return button;
     }
+
 }
 
 
