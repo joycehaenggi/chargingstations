@@ -7,6 +7,11 @@
     -fx-spacing: 10px;
 
 }
+#button-karte{
+    -fx-background-image: url("/data/Platzhalter.PNG");
+
+
+}
 
 /*#button-save{*/
     /*-fx-background-image: url("save.png");*/

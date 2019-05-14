@@ -1,5 +1,6 @@
 package ch.fhnw.chargingstationsfx;
 
+
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ public class ChargingStationsApp extends Application {
 	public void start(Stage primaryStage) {
 		RootPM rootPM    = new RootPM();
 		Parent rootPanel = new RootPanelUI(rootPM);
+
 
 		Scene scene = new Scene(rootPanel);
 		primaryStage.setTitle("ChargingStationsFX");

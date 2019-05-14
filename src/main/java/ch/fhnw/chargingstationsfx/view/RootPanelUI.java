@@ -8,7 +8,9 @@ import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
 public class RootPanelUI extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
     private SplitPane splitPane = new SplitPane();
-    private SplitPane splitPane1 = new SplitPane();
+    private Editor editor;
+    private Overview overview;
+
 
 
     public RootPanelUI(RootPM model) {
@@ -27,11 +29,13 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
 
     @Override
     public void layoutControls() {
+        editor = new Editor ();
+        overview = new Overview(rootPM);
+
         setTop(new Header());
-        splitPane.getItems().addAll(new Overview(rootPM));
+        splitPane.getItems().addAll(overview,editor);
         setLeft(splitPane);
-        splitPane1.getItems().add(new Editor());
-        setRight(splitPane1);
+
         //setCenter(new Center());
 
 
