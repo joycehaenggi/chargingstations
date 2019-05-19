@@ -5,7 +5,8 @@ import javafx.beans.property.*;
 /**
  * @author Dieter Holz
  */
-public class Ladestation {
+//CountryPM
+public class LadestationPM {
 
 	private final StringProperty companyName = new SimpleStringProperty();
 	private final StringProperty strasseName = new SimpleStringProperty();
@@ -31,10 +32,14 @@ public class Ladestation {
 	private final DoubleProperty power3Kw = new SimpleDoubleProperty();
 	private final DoubleProperty power4Kw = new SimpleDoubleProperty();
 
+	//für Proxy
+	public LadestationPM(){
+
+	}
 
 	//aus 1 Zeile wird ein Array von Strings gemacht, für jede Kolonne ein Array
 	// Array von Strings
-	public Ladestation(String[] line) {
+	public LadestationPM(String[] line) {
 		// Stelle 0: Nr.
 		setENTITY_ID(Integer.valueOf(line[0]));
 		setCompanyName(line[1]);

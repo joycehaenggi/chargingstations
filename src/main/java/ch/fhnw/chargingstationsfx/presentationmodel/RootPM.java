@@ -1,5 +1,7 @@
 package ch.fhnw.chargingstationsfx.presentationmodel;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -10,27 +12,103 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//Europe PM
+
 public class RootPM {
     private static final String FILE_NAME = "/data/CHARGING_STATION.csv";
     private static final String DELIMITER = ";";
 
     private final StringProperty applicationTitle = new SimpleStringProperty("ChargingStationsFX");
-//    private final StringProperty greeting = new SimpleStringProperty("Hello World!");
 
-    private final ObservableList<Ladestation> resultate = FXCollections.observableArrayList();
+    private final IntegerProperty selectedCountryId = new SimpleIntegerProperty(-1);
+    private final ObservableList<LadestationPM> resultate = FXCollections.observableArrayList();
 
-    public RootPM() {         resultate.addAll(readFromFile());}
+  private final LadestationPM proxy = new LadestationPM();
 
-    private List<Ladestation> readFromFile() {
+    public RootPM() {
+        resultate.addAll(readFromFile());
+
+        selectedCountryId.addListener((observable, oldValue, newValue) -> {
+            LadestationPM oldSelection = getLadestation(oldValue.intValue());
+            LadestationPM newSelection = getLadestation(newValue.intValue());
+
+            if (oldSelection != null) {
+                proxy.companyNameProperty().unbindBidirectional(oldSelection.companyNameProperty());
+                proxy.strasseNameProperty().unbindBidirectional(oldSelection.strasseNameProperty());
+                proxy.PLZProperty().unbindBidirectional(oldSelection.PLZProperty());
+                proxy.ortProperty().unbindBidirectional(oldSelection.ortProperty());
+                proxy.longitudeProperty().unbindBidirectional(oldSelection.longitudeProperty());
+                proxy.latitudeProperty().unbindBidirectional(oldSelection.latitudeProperty());
+                proxy.startDateProperty().unbindBidirectional(oldSelection.startDateProperty());
+                proxy.loaderTypeProperty().unbindBidirectional(oldSelection.loaderTypeProperty());
+                proxy.numberOfChargingPointsProperty().unbindBidirectional(oldSelection.numberOfChargingPointsProperty());
+                proxy.startDateProperty().unbindBidirectional(oldSelection.startDateProperty());
+                proxy.loaderTypeProperty().unbindBidirectional(oldSelection.loaderTypeProperty());
+                proxy.numberOfChargingPointsProperty().unbindBidirectional(oldSelection.numberOfChargingPointsProperty());
+                proxy.connectionPowerKwProperty().unbindBidirectional(oldSelection.connectionPowerKwProperty());
+                proxy.plugType1Property().unbindBidirectional(oldSelection.plugType1Property());
+                proxy.power1KwProperty().unbindBidirectional(oldSelection.power1KwProperty());
+                proxy.plugType2Property().unbindBidirectional(oldSelection.plugType2Property());
+                proxy.power2KwProperty().unbindBidirectional(oldSelection.power2KwProperty());
+                proxy.plugType3Property().unbindBidirectional(oldSelection.plugType3Property());
+                proxy.power3KwProperty().unbindBidirectional(oldSelection.power3KwProperty());
+                proxy.plugType4Property().unbindBidirectional(oldSelection.plugType4Property());
+                proxy.power4KwProperty().unbindBidirectional(oldSelection.power4KwProperty());
+
+            }
+
+            if (newSelection != null) {
+                proxy.companyNameProperty().bindBidirectional(newSelection.companyNameProperty());
+                proxy.strasseNameProperty().bindBidirectional(newSelection.strasseNameProperty());
+                proxy.PLZProperty().bindBidirectional(newSelection.PLZProperty());
+                proxy.ortProperty().bindBidirectional(newSelection.ortProperty());
+                proxy.longitudeProperty().bindBidirectional(newSelection.longitudeProperty());
+                proxy.latitudeProperty().bindBidirectional(newSelection.latitudeProperty());
+                proxy.startDateProperty().bindBidirectional(newSelection.startDateProperty());
+                proxy.loaderTypeProperty().bindBidirectional(newSelection.loaderTypeProperty());
+                proxy.numberOfChargingPointsProperty().bindBidirectional(newSelection.numberOfChargingPointsProperty());
+                proxy.startDateProperty().bindBidirectional(newSelection.startDateProperty());
+                proxy.loaderTypeProperty().bindBidirectional(newSelection.loaderTypeProperty());
+                proxy.numberOfChargingPointsProperty().bindBidirectional(newSelection.numberOfChargingPointsProperty());
+                proxy.connectionPowerKwProperty().bindBidirectional(newSelection.connectionPowerKwProperty());
+                proxy.plugType1Property().bindBidirectional(newSelection.plugType1Property());
+                proxy.power1KwProperty().bindBidirectional(newSelection.power1KwProperty());
+                proxy.plugType2Property().bindBidirectional(newSelection.plugType2Property());
+                proxy.power2KwProperty().bindBidirectional(newSelection.power2KwProperty());
+                proxy.plugType3Property().bindBidirectional(newSelection.plugType3Property());
+                proxy.power3KwProperty().bindBidirectional(newSelection.power3KwProperty());
+                proxy.plugType4Property().bindBidirectional(newSelection.plugType4Property());
+                proxy.power4KwProperty().bindBidirectional(newSelection.power4KwProperty());
+
+
+            }
+        });
+//
+
+    }
+
+    private LadestationPM getLadestation(int d){
+        return resultate.stream()
+                .filter(LadestationPM -> LadestationPM.getENTITY_ID() == d)
+                .findAny().orElse(null);
+
+    }
+
+    //added
+    public LadestationPM getLadestationProxy(){
+        return proxy;
+    }
+
+    private List<LadestationPM> readFromFile() {
         //um etwas herauslesen zu können --> bufferedReader
         try (BufferedReader reader = getReader(FILE_NAME)) {
             //1. Zeile muss übersprungen werden, da hier keine Wahlergebnisse ausgegeben werden
             return reader.lines()
                     .skip(1)
-                    // ich kriege eine Zeile ein und aus dieser Zeile mache ich eine neue Instanz von Ladestation
+                    // ich kriege eine Zeile ein und aus dieser Zeile mache ich eine neue Instanz von LadestationPM
                     //von einem grossen String ein Array von String machen mittels .split
                     //Parameter 2 ist Anzahl der Kolonnen / Spalten -> muss man jedoch nicht umebdingt schreiben
-                    .map(line -> new Ladestation(line.split(DELIMITER, 22)))
+                    .map(line -> new LadestationPM(line.split(DELIMITER, 22)))
                     .collect(Collectors.toList());
         }
 
@@ -40,6 +118,8 @@ public class RootPM {
 
         }
     }
+
+
 
 
 
@@ -97,7 +177,7 @@ public class RootPM {
 //        this.greeting.set(greeting);
 //      }
 
-    public ObservableList<Ladestation> getResultate() {
+    public ObservableList<LadestationPM> getResultate() {
         return resultate;
     }
 }
