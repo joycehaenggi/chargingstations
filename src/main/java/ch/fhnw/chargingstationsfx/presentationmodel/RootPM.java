@@ -23,7 +23,32 @@ public class RootPM {
     private final IntegerProperty selectedCountryId = new SimpleIntegerProperty(-1);
     private final ObservableList<LadestationPM> resultate = FXCollections.observableArrayList();
 
-  private final LadestationPM proxy = new LadestationPM();
+    private LadestationPM actualLadestation = new LadestationPM();
+    private final LadestationPM proxy = new LadestationPM();
+
+    public int getSelectedCountryId() {
+        return selectedCountryId.get();
+    }
+
+    public IntegerProperty selectedCountryIdProperty() {
+        return selectedCountryId;
+    }
+
+    public void setSelectedCountryId(int selectedCountryId) {
+        this.selectedCountryId.set(selectedCountryId);
+    }
+
+    public LadestationPM getActualLadestation() {
+        return actualLadestation;
+    }
+
+    public void setActualLadestation(LadestationPM actualLadestation) {
+        this.actualLadestation = actualLadestation;
+    }
+
+    public LadestationPM getProxy() {
+        return proxy;
+    }
 
     public RootPM() {
         resultate.addAll(readFromFile());
