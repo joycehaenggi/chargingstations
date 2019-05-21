@@ -4,14 +4,15 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
+import javafx.scene.layout.VBox;
 
 public class RootPanelUI extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
     private SplitPane splitPane = new SplitPane();
     private Editor editor;
     private Overview overview;
-    private ToolbarUI header;
-
+    private Toolbar toolbar;
+    private Header header;
 
 
     public RootPanelUI(RootPM model) {
@@ -26,26 +27,21 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        splitPane = new SplitPane();
         editor = new Editor(rootPM);
         overview = new Overview(rootPM);
-        header = new ToolbarUI(rootPM);
+        toolbar = new Toolbar(rootPM);
+        header = new Header(rootPM);
+
+
     }
 
     @Override
     public void layoutControls() {
 
-        header.setMaxWidth(Double.MAX_VALUE);
 
-        splitPane.setPrefSize(200,200);
-        splitPane.getItems().addAll(overview, editor);
-
-        splitPane.setMinSize(900, 500);
-
-
-        setTop(header);
-        setCenter(splitPane);
-
+        setTop(toolbar);
+        setCenter(new SplitPane(overview, new VBox(header,editor)));
+//(chargingStationsTable, new VBox(chargingStationsHeader, chargingStationsEditor)));
 
     }
 

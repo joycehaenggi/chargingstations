@@ -71,7 +71,7 @@ public class LanguageSwitcherPM {
     public LanguageSwitcherPM(){
         setLanguage(Lang.DE);
     }
-   //TODO Fragen, warum dies nicht so funktioniert
+
 
     public String getGermanButtonText() {
         return germanButtonText.get();

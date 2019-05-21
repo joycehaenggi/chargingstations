@@ -18,7 +18,6 @@ public class LadestationPM {
 	private final StringProperty plugType3 = new SimpleStringProperty();
 	private final StringProperty plugType4 = new SimpleStringProperty();
 
-	//ToDo Kalendertag
 	private final StringProperty startDate = new SimpleStringProperty();
 
 	private final IntegerProperty ENTITY_ID = new SimpleIntegerProperty();
@@ -33,7 +32,7 @@ public class LadestationPM {
 	private final DoubleProperty power3Kw = new SimpleDoubleProperty();
 	private final DoubleProperty power4Kw = new SimpleDoubleProperty();
 
-//TODO
+
 	private final DoubleBinding connectionPowerKw = power1Kw.add(power2Kw).add(power3Kw).add(power4Kw);
 
 	//für Proxy

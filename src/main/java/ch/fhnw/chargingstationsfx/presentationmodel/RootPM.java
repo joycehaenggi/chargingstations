@@ -156,7 +156,6 @@ public class RootPM {
 
 
     public void save() {
-        //todo implement
         try (BufferedWriter writer = getWriter(FILE_NAME)) {
             writer.write(HEADER);
             writer.newLine();
@@ -177,14 +176,14 @@ public class RootPM {
 
 
     public void delete() {
-        //todo implement
+        //todo funktioniert nicht?!
         resultate.remove(resultate.indexOf(getLadestation(selectedCountryId.intValue())));
 
 
 }
 
     public void add() {
-        //todo implement
+        //todo funktioniert nicht?!
         //Fügt eindeutige Id hinzu
         int uniqueId =  resultate.size() + 100000; // todo: nicht sicher unique, bessere id finden
 

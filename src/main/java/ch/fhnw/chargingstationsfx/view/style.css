@@ -10,6 +10,9 @@
 #button-karte{
     -fx-background-image: url("/data/Platzhalter.PNG");
 
+}
+#button-ort{
+    -fx-padding: 0 100 0 0;
 
 }
 
