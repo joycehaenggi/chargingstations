@@ -26,8 +26,16 @@ public class RootPM {
     private LadestationPM actualLadestation = new LadestationPM();
     private final LadestationPM proxy = new LadestationPM();
 
+    private final LanguageSwitcherPM languageSwitcherPM = new LanguageSwitcherPM();
+
+    private String HEADER;
+
     public int getSelectedCountryId() {
         return selectedCountryId.get();
+    }
+
+    public LanguageSwitcherPM getLanguageSwitcherPM() {
+        return languageSwitcherPM;
     }
 
     public IntegerProperty selectedCountryIdProperty() {
@@ -70,7 +78,6 @@ public class RootPM {
                 proxy.startDateProperty().unbindBidirectional(oldSelection.startDateProperty());
                 proxy.loaderTypeProperty().unbindBidirectional(oldSelection.loaderTypeProperty());
                 proxy.numberOfChargingPointsProperty().unbindBidirectional(oldSelection.numberOfChargingPointsProperty());
-                proxy.connectionPowerKwProperty().unbindBidirectional(oldSelection.connectionPowerKwProperty());
                 proxy.plugType1Property().unbindBidirectional(oldSelection.plugType1Property());
                 proxy.power1KwProperty().unbindBidirectional(oldSelection.power1KwProperty());
                 proxy.plugType2Property().unbindBidirectional(oldSelection.plugType2Property());
@@ -95,7 +102,7 @@ public class RootPM {
                 proxy.startDateProperty().bindBidirectional(newSelection.startDateProperty());
                 proxy.loaderTypeProperty().bindBidirectional(newSelection.loaderTypeProperty());
                 proxy.numberOfChargingPointsProperty().bindBidirectional(newSelection.numberOfChargingPointsProperty());
-                proxy.connectionPowerKwProperty().bindBidirectional(newSelection.connectionPowerKwProperty());
+
                 proxy.plugType1Property().bindBidirectional(newSelection.plugType1Property());
                 proxy.power1KwProperty().bindBidirectional(newSelection.power1KwProperty());
                 proxy.plugType2Property().bindBidirectional(newSelection.plugType2Property());
@@ -150,7 +157,42 @@ public class RootPM {
 
     public void save() {
         //todo implement
+        try (BufferedWriter writer = getWriter(FILE_NAME)) {
+            writer.write(HEADER);
+            writer.newLine();
+            resultate.stream()
+                    .map(chargingStations -> chargingStations.infoAsLine(DELIMITER))
+                    .forEach(line -> {
+                        try {
+                            writer.write(line);
+                            writer.newLine();
+                        } catch (IOException e) {
+                            throw new IllegalStateException(e);
+                        }
+                    });
+        } catch (IOException e) {
+            throw new IllegalStateException("save failed");
+        }
     }
+
+
+    public void delete() {
+        //todo implement
+        resultate.remove(resultate.indexOf(getLadestation(selectedCountryId.intValue())));
+
+
+}
+
+    public void add() {
+        //todo implement
+        //Fügt eindeutige Id hinzu
+        int uniqueId =  resultate.size() + 100000; // todo: nicht sicher unique, bessere id finden
+
+      //todo doesnt work!! ask
+      //  this.resultate.add(new LadestationPM(uniqueId);
+
+    }
+
 
 
     private BufferedReader getReader(String fileName) {

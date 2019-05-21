@@ -1,6 +1,5 @@
 package ch.fhnw.chargingstationsfx.presentationmodel;
 
-import ch.fhnw.chargingstationsfx.view.MultiLanguageText;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,7 +10,7 @@ public class LanguageSwitcherPM {
         DE, EN
     }
     public enum MultilanguageText{
-       //TODO alle Labels von LadestationPM müssen hier in DE und EN aufgeführt werden
+       //alle Labels von LadestationPM müssen hier in DE und EN aufgeführt werden
 
         GERMAN_BUTTON_TEXT("German", "Deutsch"),
         ENGLISH_BUTTON_TEXT("English", "Englisch"),
@@ -35,25 +34,27 @@ public class LanguageSwitcherPM {
         LEISTUNG4_TEXT("", "Leistung [kW]");
 
         private final String englishLabel;
-        private final String germanLablel;
+        private final String germanLabel;
+
+
 
         MultilanguageText(String englishLabel, String germanLablel){
             this.englishLabel = englishLabel;
-            this.germanLablel = germanLablel;
+            this.germanLabel = germanLablel;
         }
 
         public String getEnglishLabel() {
             return englishLabel;
         }
 
-        public String getGermanLablel() {
-            return germanLablel;
+        public String getGermanLabel() {
+            return germanLabel;
         }
 
-        public String getText(Lang lang){
+                public String getText(Lang lang){
             switch(lang){
                 case DE:
-                    return getGermanLablel();
+                    return getGermanLabel();
                 case EN:
                     return getEnglishLabel();
                 default:
@@ -64,20 +65,32 @@ public class LanguageSwitcherPM {
 
     private final StringProperty germanButtonText = new SimpleStringProperty();
     private final StringProperty englishButtonText = new SimpleStringProperty();
+    private final StringProperty firmaText = new SimpleStringProperty();
+    private final StringProperty strasseText = new SimpleStringProperty();
 
     public LanguageSwitcherPM(){
-        setLanguage(Lang.EN);
+        setLanguage(Lang.DE);
     }
    //TODO Fragen, warum dies nicht so funktioniert
+
+    public String getGermanButtonText() {
+        return germanButtonText.get();
+    }
+
+    public String getEnglishButtonText() {
+        return englishButtonText.get();
+    }
+
 
     public void setLanguage(Lang lang){
         setGermanButtonText(MultilanguageText.GERMAN_BUTTON_TEXT.getText(lang));
         setEnglishButtonText(MultilanguageText.ENGLISH_BUTTON_TEXT.getText(lang));
+        setFirmaText(MultilanguageText.FIRMA_TEXT.getText(lang));
+        setStrasseText(MultilanguageText.STRASSE_TEXT.getText(lang));
+
+
+
     }
-
-
-
-
 
 
     public StringProperty germanButtonTextProperty() {
@@ -96,5 +109,30 @@ public class LanguageSwitcherPM {
     private void setEnglishButtonText(String englishButtonText) {
         this.englishButtonText.set(englishButtonText);
     }
+
+    public String getFirmaText() {
+        return firmaText.get();
+    }
+
+    public StringProperty firmaTextProperty() {
+        return firmaText;
+    }
+
+    public void setFirmaText(String firmaText) {
+        this.firmaText.set(firmaText);
+    }
+
+    public String getStrasseText() {
+        return strasseText.get();
+    }
+
+    public StringProperty strasseTextProperty() {
+        return strasseText;
+    }
+
+    public void setStrasseText(String strasseText) {
+        this.strasseText.set(strasseText);
+    }
 }
+
 

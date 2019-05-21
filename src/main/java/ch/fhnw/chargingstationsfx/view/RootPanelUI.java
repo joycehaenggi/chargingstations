@@ -1,7 +1,6 @@
 package ch.fhnw.chargingstationsfx.view;
 
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
@@ -11,7 +10,7 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
     private SplitPane splitPane = new SplitPane();
     private Editor editor;
     private Overview overview;
-    private Header header;
+    private ToolbarUI header;
 
 
 
@@ -30,7 +29,7 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
         splitPane = new SplitPane();
         editor = new Editor(rootPM);
         overview = new Overview(rootPM);
-        header = new Header(rootPM);
+        header = new ToolbarUI(rootPM);
     }
 
     @Override

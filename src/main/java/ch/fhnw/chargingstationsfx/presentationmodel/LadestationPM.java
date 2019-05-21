@@ -1,5 +1,6 @@
 package ch.fhnw.chargingstationsfx.presentationmodel;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.*;
 
 /**
@@ -26,11 +27,14 @@ public class LadestationPM {
 
 	private final DoubleProperty longitude = new SimpleDoubleProperty();
 	private final DoubleProperty latitude = new SimpleDoubleProperty();
-	private final DoubleProperty connectionPowerKw = new SimpleDoubleProperty();
+
 	private final DoubleProperty power1Kw = new SimpleDoubleProperty();
 	private final DoubleProperty power2Kw = new SimpleDoubleProperty();
 	private final DoubleProperty power3Kw = new SimpleDoubleProperty();
 	private final DoubleProperty power4Kw = new SimpleDoubleProperty();
+
+//TODO
+	private final DoubleBinding connectionPowerKw = power1Kw.add(power2Kw).add(power3Kw).add(power4Kw);
 
 	//für Proxy
 	public LadestationPM(){
@@ -51,7 +55,6 @@ public class LadestationPM {
 		setStartDate(line[7]);
 		setLoaderType(line[8]);
 		setNumberOfChargingPoints(Integer.valueOf(line[9]));
-		setConnectionPowerKw(Double.valueOf(line[10]));
 		setPlugType1(line[11]);
 		setPower1Kw(Double.valueOf(line[12]));
 		setPlugType2(line[13]);
@@ -82,9 +85,9 @@ public class LadestationPM {
 				Integer.toString(getPLZ()),
 				Integer.toString(getNumberOfChargingPoints()),
 
+							Double.toString(getConnectionPowerKw()),
 							Double.toString(getLongitude()),
 							Double.toString(getLatitude()),
-							Double.toString(getConnectionPowerKw()),
 							Double.toString(getPower1Kw()),
 							Double.toString(getPower2Kw()),
 							Double.toString(getPower3Kw()),
@@ -267,12 +270,8 @@ public class LadestationPM {
 		return connectionPowerKw.get();
 	}
 
-	public DoubleProperty connectionPowerKwProperty() {
+	public DoubleBinding connectionPowerKwProperty() {
 		return connectionPowerKw;
-	}
-
-	public void setConnectionPowerKw(double connectionPowerKw) {
-		this.connectionPowerKw.set(connectionPowerKw);
 	}
 
 	public double getPower1Kw() {
@@ -322,4 +321,5 @@ public class LadestationPM {
 	public void setPower4Kw(double power4Kw) {
 		this.power4Kw.set(power4Kw);
 	}
+
 }

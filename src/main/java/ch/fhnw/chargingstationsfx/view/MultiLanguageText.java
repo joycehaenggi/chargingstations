@@ -8,15 +8,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+import static ch.fhnw.chargingstationsfx.presentationmodel.LanguageSwitcherPM.MultilanguageText.FIRMA_TEXT;
+
 public class MultiLanguageText extends GridPane implements ViewMixin {
     private final LanguageSwitcherPM model;
     private Button germanButton;
     private Button englishButton;
-    private Label label;
+    private Label firmaLabel;
+    private Label strasseLabel;
+
 
     public MultiLanguageText(LanguageSwitcherPM model) {
         this.model = model;
         init();
+
 
     }
     @Override
@@ -28,7 +33,9 @@ public class MultiLanguageText extends GridPane implements ViewMixin {
     public void initializeControls() {
         germanButton  = new Button();
         englishButton = new Button();
-       // label         = new Label();
+        firmaLabel = new Label();
+        strasseLabel = new Label();
+
     }
     @Override
     public void layoutControls() {
@@ -63,12 +70,40 @@ public class MultiLanguageText extends GridPane implements ViewMixin {
     }
 
     @Override
-    public void setupValueChangedListeners() {
+    public void setupBindings() {
+        germanButton.textProperty().bind(model.germanButtonTextProperty());
+        englishButton.textProperty().bind(model.englishButtonTextProperty());
+        firmaLabel.textProperty().bind(model.firmaTextProperty());
+        strasseLabel.textProperty().bind(model.strasseTextProperty());
+
+
+
+
+
+
+
+
+
+//        FIRMA_TEXT("Company Name", "Betreiber"),
+//                STRASSE_TEXT("Street*", "Strasse*"),
+//                PLZ_TEXT("Zip*", "PLZ*"),
+//                ORT_TEXT(" *", "Ort*"),
+//                LÄNGENGRAD_TEXT(" ", "Längengrad"),
+//                BREITENGRAD_TEXT("", "Breitengrad"),
+//                INBETRIEBNAHME_TEXT("", "Inbetriebnahme"),
+//                TYP_TEXT("", "Typ"),
+//                ANZAHL_LADESTATION_TEXT(" ", "Anzahl Ladestationen"),
+//                ANSCHLUSSLEISTUNG_TEXT(" ", "Anschlussleistung"),
+//                STECKERTYP1_TEXT("", "1-Steckertypen"),
+//                LEISTUNG1_TEXT("", "Leistung [kW]"),
+//                STECKERTYP2_TEXT("", "2-Steckertypen"),
+//                LEISTUNG2_TEXT("", "Leistung [kW]"),
+//                STECKERTYP3_TEXT("", "3-Steckertypen"),
+//                LEISTUNG3_TEXT("", "Leistung [kW]"),
+//                STECKERTYP4_TEXT("", "4-Steckertypen"),
+//                LEISTUNG4_TEXT("", "Leistung [kW]");
+
     }
-//    @Override
-//    public void setupBindings()  {
-//        germanButton.textProperty().bind(model.germanButtonTextProperty());
-//        englishButton.textProperty().bind(model.englishButtonTextProperty());
-//        label.textProperty().bind(model.labelTextProperty());
-//    }
+
+
 }
