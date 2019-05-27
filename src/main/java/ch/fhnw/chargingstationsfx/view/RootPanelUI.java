@@ -1,6 +1,7 @@
 package ch.fhnw.chargingstationsfx.view;
 
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;

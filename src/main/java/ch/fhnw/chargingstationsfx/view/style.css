@@ -16,6 +16,10 @@
 
 }
 
+#button-type{
+    -fx-size: 20px;
+}
+
 /*#button-save{*/
     /*-fx-background-image: url("save.png");*/
     /*-fx-min-width: -button-size;*/

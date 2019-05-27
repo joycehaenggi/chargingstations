@@ -3,12 +3,7 @@ package ch.fhnw.chargingstationsfx.view;
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.util.converter.NumberStringConverter;
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 public class Header extends GridPane implements ViewMixin{
     private final RootPM rootPM;
@@ -16,7 +11,7 @@ public class Header extends GridPane implements ViewMixin{
 
     ///hier könnte ich das obere von Editor implementieren
 
-    public Label titel;
+    public Label type;
     public Label strasse;
     public Label plz;
     public Label ort;
@@ -35,7 +30,7 @@ public class Header extends GridPane implements ViewMixin{
 
     @Override
     public void initializeControls() {
-        titel = new Label();
+        type = new Label();
         strasse = new Label();
         plz = new Label();
         ort = new Label();
@@ -65,7 +60,8 @@ public class Header extends GridPane implements ViewMixin{
         getRowConstraints().addAll(neverGrow, neverGrow, neverGrow);
 
 
-        add(titel,0,0);
+        add(type,0,0);
+        type.setId("button-id");
         add(strasse,0,1);
         add(plz, 0,2);
         //ToDo, zur Zeit übereinander, wie schaffe ich abstand oder beides in eine Spalte?
@@ -89,12 +85,12 @@ public class Header extends GridPane implements ViewMixin{
 
     @Override
     public void setupBindings(){
-        titel.textProperty().bindBidirectional(rootPM.getLadestationProxy().companyNameProperty());
-        strasse.textProperty().bindBidirectional(rootPM.getLadestationProxy().strasseNameProperty());
-        ort.textProperty().bindBidirectional(rootPM.getLadestationProxy().ortProperty());
-        plz.textProperty().bind(rootPM.getLadestationProxy().PLZProperty().asString());
-        anzahlLadepunkte.textProperty().bind(rootPM.getLadestationProxy().numberOfChargingPointsProperty().asString().concat(" Ladestationen"));
-        anschlussLeistung.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString().concat(" KW"));
+        type.textProperty().bind(rootPM.getLadestationProxy().loaderTypeProperty());
+        strasse.textProperty().bind(rootPM.getLadestationProxy().strasseNameProperty());
+      //  ort.textProperty().bindBidirectional(rootPM.getLadestationProxy().ortProperty());
+        plz.textProperty().bind(rootPM.getLadestationProxy().PLZProperty().asString().concat("  ").concat(rootPM.getLadestationProxy().ortProperty()));
+        anzahlLadepunkte.textProperty().bind(rootPM.getLadestationProxy().numberOfChargingPointsProperty().asString().concat(" Ladestation (en)"));
+        anschlussLeistung.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString("%.2f KW"));
 
 
     }
