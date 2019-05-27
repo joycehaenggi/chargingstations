@@ -2,12 +2,14 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.*;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * @author Dieter Holz
  */
 //CountryPM
 public class LadestationPM {
+
 
 	private final StringProperty companyName = new SimpleStringProperty();
 	private final StringProperty strasseName = new SimpleStringProperty();

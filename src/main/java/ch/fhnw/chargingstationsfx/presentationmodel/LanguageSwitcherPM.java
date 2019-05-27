@@ -36,7 +36,9 @@ public class LanguageSwitcherPM {
         //Header
         ADD_TEXT("Add", "Hinzufügen"),
         DELETE_TEXT("Delete", "Löschen"),
-        SAVE_TEXT("Save", "Speichern");
+        SAVE_TEXT("Save", "Speichern"),
+        REDO_TEXT("Redo", "Wiederholen"),
+        UNDO_TEXT("Undo", "Rückgängig");
 
 
         private final String englishLabel;
@@ -93,6 +95,8 @@ public class LanguageSwitcherPM {
     private final StringProperty addText = new SimpleStringProperty();
     private final StringProperty deleteText = new SimpleStringProperty();
     private final StringProperty saveText = new SimpleStringProperty();
+    private final StringProperty redoText = new SimpleStringProperty();
+    private final StringProperty undoText = new SimpleStringProperty();
 
 
 
@@ -134,7 +138,8 @@ public class LanguageSwitcherPM {
         setAddText(MultilanguageText.ADD_TEXT.getText(lang));
         setDeleteText(MultilanguageText.DELETE_TEXT.getText(lang));
         setSaveText(MultilanguageText.SAVE_TEXT.getText(lang));
-
+        setUndoText(MultilanguageText.UNDO_TEXT.getText(lang));
+        setRedoText(MultilanguageText.REDO_TEXT.getText(lang));
 
     }
 
@@ -409,6 +414,30 @@ public class LanguageSwitcherPM {
 
     public void setSaveText(String saveText) {
         this.saveText.set(saveText);
+    }
+
+    public String getRedoText() {
+        return redoText.get();
+    }
+
+    public StringProperty redoTextProperty() {
+        return redoText;
+    }
+
+    public void setRedoText(String redoText) {
+        this.redoText.set(redoText);
+    }
+
+    public String getUndoText() {
+        return undoText.get();
+    }
+
+    public StringProperty undoTextProperty() {
+        return undoText;
+    }
+
+    public void setUndoText(String undoText) {
+        this.undoText.set(undoText);
     }
 }
 

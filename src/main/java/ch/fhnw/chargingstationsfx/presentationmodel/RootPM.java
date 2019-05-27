@@ -2,10 +2,11 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
-import javax.swing.event.ChangeListener;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -13,49 +14,44 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-//Europe PM
+import java.util.stream.Stream;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/CHARGING_STATION.csv";
     private static final String DELIMITER = ";";
 
     private final StringProperty applicationTitle = new SimpleStringProperty("ChargingStationsFX");
-
-    private final ObservableList<Command> undoStack = FXCollections.observableArrayList();
-    private final ObservableList<Command> redoStack = FXCollections.observableArrayList();
-
     private final IntegerProperty selectedCountryId = new SimpleIntegerProperty(-1);
-
-    private final BooleanProperty undoDisabled = new SimpleBooleanProperty();
-    private final BooleanProperty redoDisabled = new SimpleBooleanProperty();
 
     private final ObservableList<LadestationPM> ladestationen = FXCollections.observableArrayList();
 
-    private LadestationPM actualLadestation = new LadestationPM();
     private final LadestationPM proxy = new LadestationPM();
 
     private final LanguageSwitcherPM languageSwitcherPM = new LanguageSwitcherPM();
 
+    private FilteredList<LadestationPM> filteredList;
 
-    public LadestationPM getProxy() {
-        return proxy;
-    }
 
+    // Redo / Undo
+    private final ObservableList<Command> undoStack = FXCollections.observableArrayList();
+    private final ObservableList<Command> redoStack = FXCollections.observableArrayList();
+    private final BooleanProperty undoDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty redoDisabled = new SimpleBooleanProperty();
+
+    //Todo ChangeListener
     private final ChangeListener propertyChangeListenerForUndoSupport = (observable, oldValue, newValue) -> {
         redoStack.clear();
-        System.out.println(observable);
-        undoStack.add(0, new ValueChangeCommand(RootPM.this, (Property) observable, oldValue , newValue));
+        undoStack.add(0, new ValueChangeCommand(this, (Property) observable, oldValue, newValue));
     };
-
 
     public RootPM() {
         ladestationen.addAll(readFromFile());
+        this.filteredList = new FilteredList<>(ladestationen);
 
         undoDisabled.bind(Bindings.isEmpty(undoStack));
         redoDisabled.bind(Bindings.isEmpty(redoStack));
-
 
 
         selectedCountryId.addListener((observable, oldValue, newValue) -> {
@@ -76,11 +72,12 @@ public class RootPM {
 
     }
 
-    <T> void setPropertyValueWithoutUndoSupport(Property<T> property, T newValue) {
+    <T> void setPropertyChangeListenerForUndoSupport(Property<T> property, T newValue) {
         property.removeListener(propertyChangeListenerForUndoSupport);
         property.setValue(newValue);
         property.addListener(propertyChangeListenerForUndoSupport);
     }
+
 
     public void undo() {
         if (undoStack.isEmpty()) {
@@ -109,44 +106,71 @@ public class RootPM {
         lastCommand.redo();
     }
 
+
     private void disableUndoSupport(LadestationPM ladestationPM) {
         ladestationPM.companyNameProperty().removeListener(propertyChangeListenerForUndoSupport);
-
-        //todo alle einfügen
+        ladestationPM.strasseNameProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.PLZProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.ortProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.longitudeProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.latitudeProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.startDateProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.loaderTypeProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.numberOfChargingPointsProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType1Property().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power1KwProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType2Property().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power2KwProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType3Property().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power3KwProperty().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType4Property().removeListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power4KwProperty().removeListener(propertyChangeListenerForUndoSupport);
 
     }
+
     private void enableUndoSupport(LadestationPM ladestationPM) {
         ladestationPM.companyNameProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.strasseNameProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.PLZProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.ortProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.longitudeProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.latitudeProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.startDateProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.loaderTypeProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.numberOfChargingPointsProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType1Property().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power1KwProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType2Property().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power2KwProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType3Property().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power3KwProperty().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.plugType4Property().addListener(propertyChangeListenerForUndoSupport);
+        ladestationPM.power4KwProperty().addListener(propertyChangeListenerForUndoSupport);
     }
 
+    private void bindToProxy(LadestationPM ladestationPM) {
+        proxy.companyNameProperty().bindBidirectional(ladestationPM.companyNameProperty());
+        proxy.strasseNameProperty().bindBidirectional(ladestationPM.strasseNameProperty());
+        proxy.PLZProperty().bindBidirectional(ladestationPM.PLZProperty());
+        proxy.ortProperty().bindBidirectional(ladestationPM.ortProperty());
+        proxy.longitudeProperty().bindBidirectional(ladestationPM.longitudeProperty());
+        proxy.latitudeProperty().bindBidirectional(ladestationPM.latitudeProperty());
+        proxy.startDateProperty().bindBidirectional(ladestationPM.startDateProperty());
+        proxy.loaderTypeProperty().bindBidirectional(ladestationPM.loaderTypeProperty());
+        proxy.numberOfChargingPointsProperty().bindBidirectional(ladestationPM.numberOfChargingPointsProperty());
 
-            private void bindToProxy(LadestationPM ladestationPM){
-                proxy.companyNameProperty().bindBidirectional(ladestationPM.companyNameProperty());
-                proxy.strasseNameProperty().bindBidirectional(ladestationPM.strasseNameProperty());
-                proxy.PLZProperty().bindBidirectional(ladestationPM.PLZProperty());
-                proxy.ortProperty().bindBidirectional(ladestationPM.ortProperty());
-                proxy.longitudeProperty().bindBidirectional(ladestationPM.longitudeProperty());
-                proxy.latitudeProperty().bindBidirectional(ladestationPM.latitudeProperty());
-                proxy.startDateProperty().bindBidirectional(ladestationPM.startDateProperty());
-                proxy.loaderTypeProperty().bindBidirectional(ladestationPM.loaderTypeProperty());
-                proxy.numberOfChargingPointsProperty().bindBidirectional(ladestationPM.numberOfChargingPointsProperty());
-                proxy.startDateProperty().bindBidirectional(ladestationPM.startDateProperty());
-                proxy.loaderTypeProperty().bindBidirectional(ladestationPM.loaderTypeProperty());
-                proxy.numberOfChargingPointsProperty().bindBidirectional(ladestationPM.numberOfChargingPointsProperty());
+        proxy.plugType1Property().bindBidirectional(ladestationPM.plugType1Property());
+        proxy.power1KwProperty().bindBidirectional(ladestationPM.power1KwProperty());
+        proxy.plugType2Property().bindBidirectional(ladestationPM.plugType2Property());
+        proxy.power2KwProperty().bindBidirectional(ladestationPM.power2KwProperty());
+        proxy.plugType3Property().bindBidirectional(ladestationPM.plugType3Property());
+        proxy.power3KwProperty().bindBidirectional(ladestationPM.power3KwProperty());
+        proxy.plugType4Property().bindBidirectional(ladestationPM.plugType4Property());
+        proxy.power4KwProperty().bindBidirectional(ladestationPM.power4KwProperty());
 
-                proxy.plugType1Property().bindBidirectional(ladestationPM.plugType1Property());
-                proxy.power1KwProperty().bindBidirectional(ladestationPM.power1KwProperty());
-                proxy.plugType2Property().bindBidirectional(ladestationPM.plugType2Property());
-                proxy.power2KwProperty().bindBidirectional(ladestationPM.power2KwProperty());
-                proxy.plugType3Property().bindBidirectional(ladestationPM.plugType3Property());
-                proxy.power3KwProperty().bindBidirectional(ladestationPM.power3KwProperty());
-                proxy.plugType4Property().bindBidirectional(ladestationPM.plugType4Property());
-                proxy.power4KwProperty().bindBidirectional(ladestationPM.power4KwProperty());
+    }
 
-
-            }
-
-    private void unbindFromProxy(LadestationPM ladestationPM){
+    private void unbindFromProxy(LadestationPM ladestationPM) {
         proxy.companyNameProperty().unbindBidirectional(ladestationPM.companyNameProperty());
         proxy.strasseNameProperty().unbindBidirectional(ladestationPM.strasseNameProperty());
         proxy.PLZProperty().unbindBidirectional(ladestationPM.PLZProperty());
@@ -170,15 +194,16 @@ public class RootPM {
 
     }
 
-    private LadestationPM getLadestation(int d){
+
+    private LadestationPM getLadestation(int d) {
         return ladestationen.stream()
                 .filter(LadestationPM -> LadestationPM.getENTITY_ID() == d)
                 .findAny().orElse(null);
 
     }
 
-    //added
-    public LadestationPM getLadestationProxy(){
+
+    public LadestationPM getLadestationProxy() {
         return proxy;
     }
 
@@ -209,6 +234,8 @@ public class RootPM {
 
         return new BufferedReader(reader);  // damit man zeilenweise lesen kann
     }
+
+
     //man kann sich hiermit vom FileName ein Writer geben lassen
     private BufferedWriter getWriter(String fileName) {
         try {
@@ -219,7 +246,17 @@ public class RootPM {
         }
     }
 
-    private Path getPath(String fileName)  {
+
+    private Stream<String> getStreamOfLines(String fileName) {
+        try {
+            return Files.lines(getPath(fileName), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+
+    private Path getPath(String fileName) {
         try {
             return Paths.get(getClass().getResource(fileName).toURI());
         } catch (URISyntaxException e) {
@@ -229,20 +266,20 @@ public class RootPM {
 
 
     public void save() {
-        try(BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))){
+        try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
             writer.write("header");
             writer.newLine();
             ladestationen.stream()
                     .map(allLocations -> allLocations.infoAsLine(DELIMITER))
-                    .forEach(line ->{
+                    .forEach(line -> {
                         try {
                             writer.write(line);
                             writer.newLine();
-                        } catch (IOException e){
+                        } catch (IOException e) {
                             throw new IllegalStateException(e);
                         }
                     });
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new IllegalStateException("could not save");
         }
     }
@@ -252,7 +289,7 @@ public class RootPM {
         ladestationen.remove(getLadestation(selectedCountryIdProperty().get()));
 
 
-}
+    }
 
     public void add() {
         LadestationPM newChargingStation = new LadestationPM();
@@ -274,9 +311,10 @@ public class RootPM {
 
         setSelectedCountryId(uniqueID);
 
-
-        // all getters and setters
     }
+
+    //Setter und Getter
+
 
     public static String getFileName() {
         return FILE_NAME;
@@ -298,14 +336,6 @@ public class RootPM {
         this.applicationTitle.set(applicationTitle);
     }
 
-    public ObservableList<Command> getUndoStack() {
-        return undoStack;
-    }
-
-    public ObservableList<Command> getRedoStack() {
-        return redoStack;
-    }
-
     public int getSelectedCountryId() {
         return selectedCountryId.get();
     }
@@ -316,6 +346,26 @@ public class RootPM {
 
     public void setSelectedCountryId(int selectedCountryId) {
         this.selectedCountryId.set(selectedCountryId);
+    }
+
+    public ObservableList<LadestationPM> getLadestationen() {
+        return ladestationen;
+    }
+
+    public LadestationPM getProxy() {
+        return proxy;
+    }
+
+    public LanguageSwitcherPM getLanguageSwitcherPM() {
+        return languageSwitcherPM;
+    }
+
+    public ObservableList<Command> getUndoStack() {
+        return undoStack;
+    }
+
+    public ObservableList<Command> getRedoStack() {
+        return redoStack;
     }
 
     public boolean isUndoDisabled() {
@@ -342,23 +392,31 @@ public class RootPM {
         this.redoDisabled.set(redoDisabled);
     }
 
-    public ObservableList<LadestationPM> getLadestationen() {
-        return ladestationen;
-    }
-
-    public LadestationPM getActualLadestation() {
-        return actualLadestation;
-    }
-
-    public void setActualLadestation(LadestationPM actualLadestation) {
-        this.actualLadestation = actualLadestation;
-    }
-
-    public LanguageSwitcherPM getLanguageSwitcherPM() {
-        return languageSwitcherPM;
-    }
-
     public ChangeListener getPropertyChangeListenerForUndoSupport() {
         return propertyChangeListenerForUndoSupport;
+    }
+
+
+    public void filter(String text) {
+        if(text!=null){
+        //Filter auf Strasse
+        Predicate<LadestationPM> strassePredicate = ladestationen -> ladestationen.getStrasseName().contains(text);
+        Predicate<LadestationPM> ortPredicate = ladestationen -> ladestationen.getOrt().contains(text);
+         filteredList.setPredicate(strassePredicate.or(ortPredicate));
+
+
+        }else{
+            filteredList.setPredicate(null);
+        }
+
+
+    }
+
+    public FilteredList<LadestationPM> getFilteredList() {
+        return filteredList;
+    }
+
+    public void setFilteredList(FilteredList<LadestationPM> filteredList) {
+        this.filteredList = filteredList;
     }
 }

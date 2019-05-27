@@ -3,25 +3,30 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 import javafx.beans.property.Property;
 
 public class ValueChangeCommand <T> implements Command {
+    private RootPM  rootPM;
+    private Property <T>  property;
+    private T  oldValue;
+    private T  newValue;
 
-    private final RootPM root;
-    private final Property<T> property;
-    private final T oldValue;
-    private final T newValue;
 
-
-    public ValueChangeCommand(RootPM root, Property<T> property, T oldValue, T newValue) {
-        this.root = root;
+    public ValueChangeCommand(RootPM rootPM, Property<T> property, T oldValue, T newValue) {
+        this.rootPM = rootPM;
         this.property = property;
         this.oldValue = oldValue;
         this.newValue = newValue;
     }
 
-    public void undo() {
-        root.setPropertyValueWithoutUndoSupport(property, oldValue);
+        public void undo() {
+        rootPM.setPropertyChangeListenerForUndoSupport(property, oldValue);
     }
 
     public void redo() {
-        root.setPropertyValueWithoutUndoSupport(property, newValue);
+        rootPM.setPropertyChangeListenerForUndoSupport(property, newValue);
     }
+
+
 }
+
+
+
+

@@ -4,6 +4,8 @@ import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class Header extends GridPane implements ViewMixin{
     private final RootPM rootPM;
@@ -20,7 +22,7 @@ public class Header extends GridPane implements ViewMixin{
     public Label anschlussLeistung;
     private Region spaceField;
 
-    public Button karte;
+   public Button karte;
 
 
     public Header(RootPM rootPM) {
@@ -75,6 +77,8 @@ public class Header extends GridPane implements ViewMixin{
         karte.setMaxSize(2000, 2000);
         add(karte, 2,1,3,4);
         karte.setId("button-karte");
+
+
     }
 
     @Override
@@ -89,7 +93,7 @@ public class Header extends GridPane implements ViewMixin{
         strasse.textProperty().bind(rootPM.getLadestationProxy().strasseNameProperty());
       //  ort.textProperty().bindBidirectional(rootPM.getLadestationProxy().ortProperty());
         plz.textProperty().bind(rootPM.getLadestationProxy().PLZProperty().asString().concat("  ").concat(rootPM.getLadestationProxy().ortProperty()));
-        anzahlLadepunkte.textProperty().bind(rootPM.getLadestationProxy().numberOfChargingPointsProperty().asString().concat(" Ladestation (en)"));
+        anzahlLadepunkte.textProperty().bind(rootPM.getLadestationProxy().numberOfChargingPointsProperty().asString().concat(" Ladestation(en)"));
         anschlussLeistung.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString("%.2f KW"));
 
 
