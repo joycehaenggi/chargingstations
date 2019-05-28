@@ -38,8 +38,8 @@ public class LanguageSwitcherPM {
         DELETE_TEXT("Delete", "Löschen"),
         SAVE_TEXT("Save", "Speichern"),
         REDO_TEXT("Redo", "Wiederholen"),
-        UNDO_TEXT("Undo", "Rückgängig");
-
+        UNDO_TEXT("Undo", "Rückgängig"),
+        SEARCH_TEXT("Search:", "Suchen:");
 
         private final String englishLabel;
         private final String germanLabel;
@@ -97,6 +97,7 @@ public class LanguageSwitcherPM {
     private final StringProperty saveText = new SimpleStringProperty();
     private final StringProperty redoText = new SimpleStringProperty();
     private final StringProperty undoText = new SimpleStringProperty();
+    private final StringProperty searchText = new SimpleStringProperty();
 
 
 
@@ -140,6 +141,7 @@ public class LanguageSwitcherPM {
         setSaveText(MultilanguageText.SAVE_TEXT.getText(lang));
         setUndoText(MultilanguageText.UNDO_TEXT.getText(lang));
         setRedoText(MultilanguageText.REDO_TEXT.getText(lang));
+        setSearchText(MultilanguageText.SEARCH_TEXT.getText(lang));
 
     }
 
@@ -438,6 +440,18 @@ public class LanguageSwitcherPM {
 
     public void setUndoText(String undoText) {
         this.undoText.set(undoText);
+    }
+
+    public String getSearchText() {
+        return searchText.get();
+    }
+
+    public StringProperty searchTextProperty() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText.set(searchText);
     }
 }
 

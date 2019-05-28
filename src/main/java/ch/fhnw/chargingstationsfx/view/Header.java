@@ -63,7 +63,7 @@ public class Header extends GridPane implements ViewMixin{
 
 
         add(type,0,0);
-        type.setId("button-id");
+        type.setId("label-id");
         add(strasse,0,1);
         add(plz, 0,2);
         //ToDo, zur Zeit übereinander, wie schaffe ich abstand oder beides in eine Spalte?
@@ -75,7 +75,7 @@ public class Header extends GridPane implements ViewMixin{
 
         karte = new Button();
         karte.setMaxSize(2000, 2000);
-        add(karte, 2,1,3,4);
+        add(karte, 1,1,2,7);
         karte.setId("button-karte");
 
 

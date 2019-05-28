@@ -3,21 +3,47 @@
 }
 
 .root {
-    -fx-padding: 20px;
-    -fx-spacing: 10px;
+    -fx-background-color: white;
+    -fx-font-family: "Droid Sans Mono Dotted";
+    -fx-padding:3,30,3,30;
 
 }
 #button-karte{
     -fx-background-image: url("/data/Platzhalter.PNG");
 
 }
-#button-ort{
-    -fx-padding: 0 100 0 0;
-
-}
 
 #button-type{
     -fx-size: 20px;
+}
+
+#button-search{
+    -fx-background-color: transparent;
+}
+
+.button{
+    -fx-background-color:
+            #3c7fb1,
+            linear-gradient(#fafdfe, #e8f5fc),
+            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 10 3 10;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+}
+
+.text-field {
+    -fx-font-size: 12px;
+    -fx-boarder: gone;
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    //-fx-border-color: #3c7fb1;
+
+    }
+
+#label-id{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
 }
 
 /*#button-save{*/
@@ -36,12 +62,46 @@
     /*-fx-min-height: -button-size;*/
     /*-fx-max-width: -button-size;*/
     /*-fx-max-height: -button-size;*/
-/*}*/
+/*}
 
-/*#button-add{*/
-    /*-fx-background-image:url("add.png");*/
-    /*-fx-min-width: -button-size;*/
-    /*-fx-min-height: -button-size;*/
-    /*-fx-max-width: -button-size;*/
-    /*-fx-max-height: -button-size;*/
+#button-add{
+    -fx-background-color:
+            #3c7fb1,
+            linear-gradient(#fafdfe, #e8f5fc),
+            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 10 3 10;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+
+    #button-save{
+    -fx-background-color:
+            #3c7fb1,
+            linear-gradient(#fafdfe, #e8f5fc),
+            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 10 3 10;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+
+
+
+#button-delete{
+    -fx-background-color:
+            #3c7fb1,
+            linear-gradient(#fafdfe, #e8f5fc),
+            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 10 3 10;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+}
+#button-ort{
+    -fx-padding: 0 100 0 0;
+    }
+}
+}
 /*}*/

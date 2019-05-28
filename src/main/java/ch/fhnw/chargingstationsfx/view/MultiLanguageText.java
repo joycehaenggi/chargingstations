@@ -2,12 +2,16 @@ package ch.fhnw.chargingstationsfx.view;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.LadestationPM;
 import ch.fhnw.chargingstationsfx.presentationmodel.LanguageSwitcherPM;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+
+import java.util.Optional;
 
 public class MultiLanguageText extends GridPane implements ViewMixin {
     private final LanguageSwitcherPM languageSwitcherPM;
@@ -66,6 +70,8 @@ public class MultiLanguageText extends GridPane implements ViewMixin {
     public void setupEventHandlers() {
         germanButton.setOnAction(event  -> languageSwitcherPM.setLanguage(LanguageSwitcherPM.Lang.DE));
         englishButton.setOnAction(event -> languageSwitcherPM.setLanguage(LanguageSwitcherPM.Lang.EN));
+
+
     }
 
     @Override

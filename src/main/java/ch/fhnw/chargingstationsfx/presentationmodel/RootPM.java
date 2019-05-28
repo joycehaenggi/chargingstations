@@ -313,6 +313,22 @@ public class RootPM {
 
     }
 
+    public void filter(String text) {
+        if(text!=null){
+            //Filter auf Strasse
+            Predicate<LadestationPM> strassePredicate = ladestationen -> ladestationen.getStrasseName().contains(text);
+            Predicate<LadestationPM> ortPredicate = ladestationen -> ladestationen.getOrt().contains(text);
+            Predicate<LadestationPM> PLZPredicate = ladestationen -> Integer.toString(ladestationen.getPLZ()).contains(text);
+            Predicate<LadestationPM> numberOfCharginPointsPredicate = ladestationen -> Integer.toString(ladestationen.getNumberOfChargingPoints()).contains(text);
+            filteredList.setPredicate(strassePredicate.or(ortPredicate).or(PLZPredicate).or(numberOfCharginPointsPredicate));
+        }else{
+            filteredList.setPredicate(null);
+        }
+
+
+    }
+
+
     //Setter und Getter
 
 
@@ -396,21 +412,6 @@ public class RootPM {
         return propertyChangeListenerForUndoSupport;
     }
 
-
-    public void filter(String text) {
-        if(text!=null){
-        //Filter auf Strasse
-        Predicate<LadestationPM> strassePredicate = ladestationen -> ladestationen.getStrasseName().contains(text);
-        Predicate<LadestationPM> ortPredicate = ladestationen -> ladestationen.getOrt().contains(text);
-         filteredList.setPredicate(strassePredicate.or(ortPredicate));
-
-
-        }else{
-            filteredList.setPredicate(null);
-        }
-
-
-    }
 
     public FilteredList<LadestationPM> getFilteredList() {
         return filteredList;
