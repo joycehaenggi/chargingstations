@@ -33,6 +33,9 @@ public class RootPM {
 
     private FilteredList<LadestationPM> filteredList;
 
+    //Counting
+    private IntegerProperty count = new SimpleIntegerProperty();
+    private IntegerProperty totalCount = new SimpleIntegerProperty();
 
     // Redo / Undo
     private final ObservableList<Command> undoStack = FXCollections.observableArrayList();
@@ -50,6 +53,11 @@ public class RootPM {
         ladestationen.addAll(readFromFile());
         this.filteredList = new FilteredList<>(ladestationen);
 
+        //Count
+        totalCount.bind(Bindings.size(ladestationen));
+        count.bind(Bindings.size(filteredList));
+
+        //Redo Undo
         undoDisabled.bind(Bindings.isEmpty(undoStack));
         redoDisabled.bind(Bindings.isEmpty(redoStack));
 
@@ -419,5 +427,29 @@ public class RootPM {
 
     public void setFilteredList(FilteredList<LadestationPM> filteredList) {
         this.filteredList = filteredList;
+    }
+
+    public int getCount() {
+        return count.get();
+    }
+
+    public IntegerProperty countProperty() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count.set(count);
+    }
+
+    public int getTotalCount() {
+        return totalCount.get();
+    }
+
+    public IntegerProperty totalCountProperty() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount.set(totalCount);
     }
 }
