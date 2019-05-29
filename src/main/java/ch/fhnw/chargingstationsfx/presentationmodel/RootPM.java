@@ -293,7 +293,7 @@ public class RootPM {
         }
     }
 
-    //TODO
+
     public void delete() {
         ladestationen.remove(getLadestation(selectedCountryIdProperty().get()));
 
