@@ -9,10 +9,10 @@ import javafx.scene.layout.VBox;
 public class RootPanelUI extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
     private SplitPane splitPane = new SplitPane();
-    private Editor editor;
-    private Overview overview;
-    private Toolbar toolbar;
-    private Header header;
+    private EditorUI editor;
+    private TabelleUI overview;
+    private ToolbarUI toolbar;
+    private HeaderUI header;
 
 
     public RootPanelUI(RootPM model) {
@@ -27,10 +27,10 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        editor = new Editor(rootPM);
-        overview = new Overview(rootPM);
-        toolbar = new Toolbar(rootPM);
-        header = new Header(rootPM);
+        editor = new EditorUI(rootPM);
+        overview = new TabelleUI(rootPM);
+        toolbar = new ToolbarUI(rootPM);
+        header = new HeaderUI(rootPM);
 
 
     }

@@ -53,6 +53,7 @@ public class RootPM {
         ladestationen.addAll(readFromFile());
         this.filteredList = new FilteredList<>(ladestationen);
 
+
         //Count
         totalCount.bind(Bindings.size(ladestationen));
         count.bind(Bindings.size(filteredList));

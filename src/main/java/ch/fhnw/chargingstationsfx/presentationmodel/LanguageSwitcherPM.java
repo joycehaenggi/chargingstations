@@ -33,7 +33,7 @@ public class LanguageSwitcherPM {
         PLUGTYPE4_TEXT("Plug Typ 4", "4-Steckertypen"),
         POWER4KW_TEXT("Power 4 [kW]", "Leistung [kW]"),
 
-        //Header
+        //HeaderUI
         ADD_TEXT("Add", "Hinzufügen"),
         DELETE_TEXT("Delete", "Löschen"),
         SAVE_TEXT("Save", "Speichern"),
@@ -91,7 +91,7 @@ public class LanguageSwitcherPM {
     private final StringProperty plugtype4Text = new SimpleStringProperty();
     private final StringProperty power4KWText = new SimpleStringProperty();
 
-    //Header
+    //HeaderUI
     private final StringProperty addText = new SimpleStringProperty();
     private final StringProperty deleteText = new SimpleStringProperty();
     private final StringProperty saveText = new SimpleStringProperty();

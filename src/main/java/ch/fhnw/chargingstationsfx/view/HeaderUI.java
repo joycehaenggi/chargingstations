@@ -7,11 +7,11 @@ import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class Header extends GridPane implements ViewMixin{
+public class HeaderUI extends GridPane implements ViewMixin{
     private final RootPM rootPM;
     private VBox  vBox = new VBox();
 
-    ///hier könnte ich das obere von Editor implementieren
+    ///hier könnte ich das obere von EditorUI implementieren
 
     public Label type;
     public Label strasse;
@@ -25,7 +25,7 @@ public class Header extends GridPane implements ViewMixin{
    public Button karte;
 
 
-    public Header(RootPM rootPM) {
+    public HeaderUI(RootPM rootPM) {
         this.rootPM = rootPM;
         init();
     }
