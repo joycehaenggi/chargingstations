@@ -33,6 +33,8 @@ public class RootPM {
 
     private FilteredList<LadestationPM> filteredList;
 
+    private String HEADER;
+
     //Counting
     private IntegerProperty count = new SimpleIntegerProperty();
     private IntegerProperty totalCount = new SimpleIntegerProperty();
@@ -276,7 +278,7 @@ public class RootPM {
 
     public void save() {
         try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
-            writer.write("header");
+            writer.write(HEADER);
             writer.newLine();
             ladestationen.stream()
                     .map(allLocations -> allLocations.infoAsLine(DELIMITER))
@@ -452,5 +454,13 @@ public class RootPM {
 
     public void setTotalCount(int totalCount) {
         this.totalCount.set(totalCount);
+    }
+
+    public String getHEADER() {
+        return HEADER;
+    }
+
+    public void setHEADER(String HEADER) {
+        this.HEADER = HEADER;
     }
 }
