@@ -277,8 +277,8 @@ public class RootPM {
 
 
     public void save() {
-        try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
-            writer.write(HEADER);
+        try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))){
+            writer.write("header");
             writer.newLine();
             ladestationen.stream()
                     .map(allLocations -> allLocations.infoAsLine(DELIMITER))
@@ -291,7 +291,7 @@ public class RootPM {
                         }
                     });
         } catch (IOException e) {
-            throw new IllegalStateException("could not save");
+            throw new IllegalStateException("unable to save");
         }
     }
 
@@ -301,6 +301,7 @@ public class RootPM {
 
 
     }
+
 
     public void add() {
         LadestationPM newChargingStation = new LadestationPM();
