@@ -64,10 +64,6 @@ public class TabelleUI extends VBox implements ViewMixin{
 
     @Override
     public void setupEventHandlers() {
-//        tabelle.setOnMouseClicked(event -> {
-//            rootPM.setSelectedCountryId(tabelle.getSelectionModel().getSelectedItem().getENTITY_ID());
-//        });
-
     tabelle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     rootPM.setSelectedCountryId(newValue.getENTITY_ID());
@@ -76,7 +72,6 @@ public class TabelleUI extends VBox implements ViewMixin{
             });
     }
 
-  //  });
 
 
 

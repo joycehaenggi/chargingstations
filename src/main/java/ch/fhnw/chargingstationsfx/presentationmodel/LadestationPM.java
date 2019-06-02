@@ -79,7 +79,7 @@ public class LadestationPM {
                 Double.toString(getLongitude()),
                 Double.toString(getLatitude()),
                 getStartDate(),
-				                getLoaderType(),
+                getLoaderType(),
                 Integer.toString(getNumberOfChargingPoints()),
                 Double.toString(getConnectionPowerKw()),
                 getPlugType1(),
@@ -92,7 +92,7 @@ public class LadestationPM {
                 Double.toString(getPower4Kw())
 
 
-                );
+        );
     }
 
     //getters and setters
