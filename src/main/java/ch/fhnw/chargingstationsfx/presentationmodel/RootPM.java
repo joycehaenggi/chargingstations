@@ -66,7 +66,8 @@ public class RootPM {
         for(LadestationPM ladestation: ladestationen) {
             if (!ladestation.getStartDate().isEmpty() && ladestation.getStartDate() != null) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
-                System.out.println(ladestation.getStartDate());
+                //Ausgabe der Daten auf Konsole
+                // System.out.println(ladestation.getStartDate());
                 LocalDate localDate = LocalDate.parse(ladestation.getStartDate(), formatter);
 
                 localDates.add(localDate);
@@ -299,7 +300,7 @@ public class RootPM {
 
     public void save() {
         try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))){
-            writer.write("header");
+            writer.write("ENTITY_ID;OPERATING_COMPANY;ADDRESS;ZIP_CODE;CITY;LONGITUDE;LATITUDE;START_UP_DATE;LOADER_TYPE;NUMBER_OF_CHARGING_POINTS;CONNECTION_POWER_KW;PLUG_TYPES_1;POWER_1_KW;PLUG_TYPES_2;POWER_2_KW;PLUG_TYPES_3;POWER_3_KW;PLUG_TYPES_4;POWER_4_KW");
             writer.newLine();
             ladestationen.stream()
                     .map(allLocations -> allLocations.infoAsLine(DELIMITER))

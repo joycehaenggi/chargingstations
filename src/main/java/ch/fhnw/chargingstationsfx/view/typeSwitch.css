@@ -1,0 +1,18 @@
+.toggleSwitch .button {
+    -fx-arc-height: 50;
+    -fx-arc-width : 50;
+}
+
+.toggleSwitch .bar {
+    -fx-arc-height: 50;
+    -fx-arc-width : 50;
+}
+
+.toggleSwitch .display {
+    -fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    -fx-font-weight: Bold;
+    /*-fx-fill: slategray;*/
+    -fx-font-size: 20pt;
+
+
+}

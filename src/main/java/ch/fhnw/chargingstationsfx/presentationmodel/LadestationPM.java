@@ -77,6 +77,7 @@ public class LadestationPM {
 
     public String infoAsLine(String delimiter) {
         return String.join(delimiter,
+            //    getENTITY_ID().toString(),
                 Integer.toString(getENTITY_ID()),
                 getCompanyName(),
                 getStrasseName(),

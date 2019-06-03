@@ -81,18 +81,6 @@ public class TabelleUI extends VBox implements ViewMixin {
     }
 
 
-    private void addValueChangeListeners() {
-        //todo
-        // Convert to SelectionModel with LocalDate
-       // selectionModel = tabelle.getSelectionModel();
-
-        selectionModel.selectedIndexProperty().addListener((e, oldV, newV) -> {
-            selectedDateIndex = selectionModel.getSelectedIndex();
-            rootPM.setSelectedDate(selectionModel.getSelectedItem());
-        });
-    }
-
-
     @Override
     public void setupBindings() {
         counter.textProperty().bind(rootPM.countProperty().asString()

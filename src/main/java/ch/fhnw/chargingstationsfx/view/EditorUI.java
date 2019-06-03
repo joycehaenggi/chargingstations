@@ -46,7 +46,9 @@ public class EditorUI extends GridPane implements ViewMixin {
     public TextField longitudeTextField;
     public TextField latitudeTextField;
     public TextField inbetriebnahmeTextField;
-    public TextField loaderTypeTextField;
+   // public TextField loaderTypeTextField;
+   private TypeSwitch typeSwitch;
+
     public TextField numberOfChargingPointsTextField;
     public TextField plugType1TextField;
     public TextField power1Kw;
@@ -95,7 +97,9 @@ public class EditorUI extends GridPane implements ViewMixin {
         longitudeTextField = new TextField();
         latitudeTextField = new TextField();
         inbetriebnahmeTextField = new TextField();
-        loaderTypeTextField = new TextField();
+      //  loaderTypeTextField = new TextField();
+        typeSwitch = new TypeSwitch();
+
         numberOfChargingPointsTextField = new TextField();
 
         plugType1TextField = new TextField();
@@ -157,7 +161,7 @@ public class EditorUI extends GridPane implements ViewMixin {
         add(longitudeTextField, 1, 10);
         add(latitudeTextField, 3, 10);
         add(inbetriebnahmeTextField, 1, 11);
-        add(loaderTypeTextField, 3, 11);
+       add(typeSwitch, 3, 11);
         add(numberOfChargingPointsTextField, 1, 12);
         add(connectionPowerKwTextField, 3, 12);
         add(plugType1TextField, 1, 13);
@@ -209,7 +213,8 @@ public class EditorUI extends GridPane implements ViewMixin {
         longitudeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().longitudeProperty(), new NumberStringConverter());
         latitudeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().latitudeProperty(), new NumberStringConverter());
         inbetriebnahmeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().startDateProperty());
-        loaderTypeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().loaderTypeProperty());
+      //  loaderTypeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().loaderTypeProperty());
+        typeSwitch.typeProperty().bindBidirectional(rootPM.getProxy().loaderTypeProperty());
 
         numberOfChargingPointsTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().numberOfChargingPointsProperty(), new NumberStringConverter());
         connectionPowerKwTextField.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString("%.2f KW"));
