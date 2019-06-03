@@ -1,21 +1,13 @@
 package ch.fhnw.chargingstationsfx.view;
 
-
 import ch.fhnw.chargingstationsfx.presentationmodel.LadestationPM;
-
-
 import ch.fhnw.chargingstationsfx.presentationmodel.LanguageSwitcherPM;
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
-
 import javafx.geometry.Insets;
-
 import javafx.scene.control.*;
-
 import javafx.scene.layout.*;
 
-
 import java.util.Optional;
-;
 
 
 public class ToolbarUI extends HBox implements ViewMixin {
@@ -25,7 +17,7 @@ public class ToolbarUI extends HBox implements ViewMixin {
 
     private LanguageSwitcherPM languageSwitcherPM;
     private LadestationPM ladestationPM;
- private MultiLanguageText multiLanguageText;
+    private MultiLanguageText multiLanguageText;
 
     //Deklaration
     private Button saveButton;
@@ -45,97 +37,89 @@ public class ToolbarUI extends HBox implements ViewMixin {
 
 
     }
+
     @Override
     public void initializeControls() {
         //Initialisierung
         saveButton = new Button();
-        addButton = new Button ();
+        addButton = new Button();
         deleteButton = new Button();
-        undoButton  = new Button();
-        redoButton = new Button ();
-
+        undoButton = new Button();
+        redoButton = new Button();
         search = new Button();
-
 
 
         searchField = new TextField();
         spaceField = new Region();
 
-        //germanButton = new Button(LanguageSwitcherPM.Lang.DE);
-        //englishButton = new Button ("English");
-       multiLanguageText = new MultiLanguageText(languageSwitcherPM, ladestationPM);
+        multiLanguageText = new MultiLanguageText(languageSwitcherPM, ladestationPM);
     }
+
     @Override
     public void layoutControls() {
 
         HBox.setHgrow(spaceField, Priority.ALWAYS);
-        saveButton.setMaxSize(200,200);
-        saveButton.setId("button-save");
-        deleteButton.setId("button-delete");
-        addButton.setId("button-add");
-        search.setId("button-search");
-        getChildren().addAll(saveButton,addButton,deleteButton,undoButton, redoButton, spaceField, multiLanguageText, search, searchField);
+        search.setId("search-button");
+        getChildren().addAll(saveButton, addButton, deleteButton, undoButton, redoButton, spaceField, multiLanguageText, search, searchField);
         setSpacing(10);
         setPadding(new Insets(0, 0, 5, 0));
 
 
     }
+
     @Override
-    public void initializeSelf(){
+    public void initializeSelf() {
         String stylesheet = getClass().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
     }
-@Override
+
+    @Override
     public void setupEventHandlers() {
 
-        //todo
-
-    saveButton.setOnAction(event ->{
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Änderungen speichern");
-        alert.setHeaderText(null);
-        alert.setContentText("Möchten Sie die Änderung im File CHARGING_STATION.csv speichern?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            rootPM.save();
-        }
-    });
-
-    addButton.setOnAction(event -> {
+        saveButton.setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Änderungen speichern");
-    alert.setHeaderText(null);
-    alert.setContentText("Möchten Sie eine neue Ladestation hinzufügen?");
+            alert.setTitle("Änderungen speichern");
+            alert.setHeaderText(null);
+            alert.setContentText("Möchten Sie die Änderung im File CHARGING_STATION.csv speichern?");
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK){
-        rootPM.add();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                rootPM.save();
+            }
+        });
+
+        addButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Änderungen speichern");
+            alert.setHeaderText(null);
+            alert.setContentText("Möchten Sie eine neue Ladestation hinzufügen?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                rootPM.add();
+            }
+        });
+        deleteButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Änderungen speichern");
+            alert.setHeaderText(null);
+            alert.setContentText("Möchten Sie diese Ladestation wirklich löschen?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                rootPM.delete();
+            }
+        });
+
+
+        undoButton.setOnAction(event -> rootPM.undo());
+        redoButton.setOnAction(event -> rootPM.redo());
+
+
+        searchField.setOnKeyTyped(event -> rootPM.filter(searchField.getText()));
+
+
     }
-});
-    deleteButton.setOnAction(event -> {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Änderungen speichern");
-        alert.setHeaderText(null);
-        alert.setContentText("Möchten Sie diese Ladestation wirklich löschen?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            rootPM.delete();
-        }
-    });
-
-
-    undoButton.setOnAction(event -> rootPM.undo());
-    redoButton.setOnAction(event -> rootPM.redo());
-
-
-    //todo add keyevent
-    searchField.setOnKeyTyped(event -> rootPM.filter(searchField.getText()));
-
-
-
-}
 
     @Override
     public void setupBindings() {
@@ -154,9 +138,7 @@ public class ToolbarUI extends HBox implements ViewMixin {
 
     }
 
-   ;
-
-
+    ;
 
 
 }

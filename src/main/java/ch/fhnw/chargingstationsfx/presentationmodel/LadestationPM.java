@@ -2,7 +2,11 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
+import java.time.LocalDate;
 
 /**
  * @author Dieter Holz
@@ -36,6 +40,8 @@ public class LadestationPM {
 
 
     private final DoubleBinding connectionPowerKw = power1Kw.add(power2Kw).add(power3Kw).add(power4Kw);
+
+
 
     //für Proxy
     public LadestationPM() {

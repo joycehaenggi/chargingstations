@@ -2,6 +2,10 @@
 
 ## Bearbeitet von
  - Joyce Hänggi
+ 
+##Custom Control von
+ - Linus Kohler
+ - Manuel Riedi
 
 ## Abgabe
 - Mittwoch, 5.6.2019, 18:00 Uhr

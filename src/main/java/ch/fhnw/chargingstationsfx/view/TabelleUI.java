@@ -2,32 +2,39 @@ package ch.fhnw.chargingstationsfx.view;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.LadestationPM;
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-import static javafx.beans.binding.Bindings.concat;
+import java.time.LocalDate;
 
-public class TabelleUI extends VBox implements ViewMixin{
+
+public class TabelleUI extends VBox implements ViewMixin {
 
 
     private final RootPM rootPM;
     private TableView<LadestationPM> tabelle;
     private Label counter;
+    private SelectionModel<LocalDate> selectionModel;
+    private int selectedDateIndex;
 
-       public TabelleUI(RootPM rootPM) {
-           this.rootPM = rootPM;
-            init();
-       }
+
+    public TabelleUI(RootPM rootPM) {
+        this.rootPM = rootPM;
+        init();
+    }
 
 
     @Override
-       public void initializeControls(){
+    public void initializeControls() {
 
-           counter = new Label();
+        counter = new Label();
 
         tabelle = new TableView<>(rootPM.getFilteredList());
 
@@ -49,11 +56,12 @@ public class TabelleUI extends VBox implements ViewMixin{
         anzahlLadestationCol.setCellValueFactory(cel -> cel.getValue().numberOfChargingPointsProperty());
 
         tabelle.getColumns().addAll(strasseCol, PLZCol, ortCole, anzahlLadestationCol);
+
     }
 
     @Override
     public void layoutControls() {
-           setVgrow(tabelle, Priority.ALWAYS);
+        setVgrow(tabelle, Priority.ALWAYS);
 
         getChildren().addAll(tabelle, counter);
 
@@ -64,25 +72,33 @@ public class TabelleUI extends VBox implements ViewMixin{
 
     @Override
     public void setupEventHandlers() {
-    tabelle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    rootPM.setSelectedCountryId(newValue.getENTITY_ID());
+        tabelle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                rootPM.setSelectedCountryId(newValue.getENTITY_ID());
 
-                }
-            });
+            }
+        });
     }
 
 
+    private void addValueChangeListeners() {
+        //todo
+        // Convert to SelectionModel with LocalDate
+       // selectionModel = tabelle.getSelectionModel();
 
-
-    @Override
-    public void setupValueChangedListeners() {
+        selectionModel.selectedIndexProperty().addListener((e, oldV, newV) -> {
+            selectedDateIndex = selectionModel.getSelectedIndex();
+            rootPM.setSelectedDate(selectionModel.getSelectedItem());
+        });
     }
+
+
     @Override
     public void setupBindings() {
-           counter.textProperty().bind(rootPM.countProperty().asString()
-           .concat(" /")
-           .concat(rootPM.totalCountProperty().asString()));
+        counter.textProperty().bind(rootPM.countProperty().asString()
+                .concat(" /")
+                .concat(rootPM.totalCountProperty().asString()));
+
     }
 
     public RootPM getRootPM() {

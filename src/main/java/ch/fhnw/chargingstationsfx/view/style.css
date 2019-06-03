@@ -1,10 +1,6 @@
-* {
-    -button-size: 2em;
-}
-
 .root {
     -fx-background-color: white;
-    -fx-font-family: "Droid Sans Mono Dotted";
+     -fx-font-family: "Droid Sans Mono Slashed";
     -fx-padding:3,30,3,30;
 
 }
@@ -15,10 +11,6 @@
 
 #button-type{
     -fx-size: 20px;
-}
-
-#button-search{
-    -fx-background-color: transparent;
 }
 
 .button{
@@ -36,72 +28,56 @@
 .text-field {
     -fx-font-size: 12px;
     -fx-boarder: gone;
-    -fx-background-color: -fx-text-box-border, -fx-background ;
-    //-fx-border-color: #3c7fb1;
+    -fx-background-color: transparent, rgba(83, 172, 255, 0.44), transparent, rgba(83, 172, 255, 0.44);
 
     }
+
+#search-button{
+    -fx-background-color: transparent;
+
+}
 
 #label-id{
     -fx-font-weight: bold;
     -fx-font-size: 15px;
 }
-
-/*#button-save{*/
-    /*-fx-background-image: url("save.png");*/
-    /*-fx-min-width: -button-size;*/
-    /*-fx-min-height: -button-size;*/
-    /*-fx-max-width: -button-size;*/
-    /*-fx-max-height: -button-size;*/
-/*}*/
-
-/*#button-delete{*/
-    /*-fx-background-image:url("cancel.png");*/
-
-    /*-fx-background-repeat: no-repeat;*/
-    /*-fx-min-width: -button-size;*/
-    /*-fx-min-height: -button-size;*/
-    /*-fx-max-width: -button-size;*/
-    /*-fx-max-height: -button-size;*/
-/*}
-
-#button-add{
-    -fx-background-color:
-            #3c7fb1,
-            linear-gradient(#fafdfe, #e8f5fc),
-            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 10 3 10;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
-
-    #button-save{
-    -fx-background-color:
-            #3c7fb1,
-            linear-gradient(#fafdfe, #e8f5fc),
-            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 10 3 10;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
-
-
-
-#button-delete{
-    -fx-background-color:
-            #3c7fb1,
-            linear-gradient(#fafdfe, #e8f5fc),
-            linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 10 3 10;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
+.start-up-control {
+    -selection-color: #3c7fb1;
+    -station-color: rgba(83, 172, 255, 0.44);
 }
-#button-ort{
-    -fx-padding: 0 100 0 0;
-    }
+
+.start-up-control .legend-text {
+    -fx-font-family: 'Nunito Regular';
+    -fx-font-size: 9px;
+    -fx-fill: #323232;
 }
+
+.start-up-control .tube-hole-pattern {
+    -fx-fill: #F2F2F2;
 }
-/*}*/
+
+.start-up-control .background {
+    -fx-fill: #E1E1E1;
+}
+
+.start-up-control .station-pattern {
+    -fx-fill: -station-color;
+    -fx-border-radius: 5 5 5 5;
+    -fx-arc-height: 5.0d;
+    -fx-arc-width: 5.0d;
+}
+
+.start-up-control .selected-station-pattern {
+    -fx-fill: -selection-color;
+    -fx-border-radius: 5 5 5 5;
+    -fx-arc-height: 5.0d;
+    -fx-arc-width: 5.0d;
+}
+
+.start-up-control .fill-level-bar {
+    -fx-fill: -station-color;
+}
+
+.start-up-control .selected-fill-level-bar {
+    -fx-fill: -selection-color;
+}

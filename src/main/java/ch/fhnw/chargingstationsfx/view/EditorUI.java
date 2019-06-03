@@ -85,7 +85,6 @@ public class EditorUI extends GridPane implements ViewMixin {
         power3KwLabel = new Label();
         plugType4Label = new Label();
         power4KwLabel = new Label();
-        // Todo
         connectionPowerKwTextField = new Label();
 
 
@@ -107,17 +106,12 @@ public class EditorUI extends GridPane implements ViewMixin {
         power3Kw = new TextField();
         plugType4TextField = new TextField();
         power4Kw = new TextField();
-
-
     }
 
     @Override
     public void layoutControls() {
-
-
         setVgap(5);
         setHgap(10);
-
 
         ColumnConstraints noGrow = new ColumnConstraints();
         noGrow.setHgrow(Priority.NEVER);
@@ -212,14 +206,12 @@ public class EditorUI extends GridPane implements ViewMixin {
         strasseTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().strasseNameProperty());
         PLZTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().PLZProperty(), new NumberStringConverter("####"));
         ortTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().ortProperty());
-        //TODO, dies ergibt ein Integer und nicht ein Double, wieso? .asString() funktioniert nicht
         longitudeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().longitudeProperty(), new NumberStringConverter());
         latitudeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().latitudeProperty(), new NumberStringConverter());
         inbetriebnahmeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().startDateProperty());
         loaderTypeTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().loaderTypeProperty());
 
         numberOfChargingPointsTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().numberOfChargingPointsProperty(), new NumberStringConverter());
-        //Todo runden
         connectionPowerKwTextField.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString("%.2f KW"));
 
         plugType1TextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().plugType1Property());

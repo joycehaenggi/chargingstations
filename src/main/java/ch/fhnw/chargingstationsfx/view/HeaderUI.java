@@ -7,11 +7,9 @@ import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class HeaderUI extends GridPane implements ViewMixin{
+public class HeaderUI extends GridPane implements ViewMixin {
     private final RootPM rootPM;
-    private VBox  vBox = new VBox();
-
-    ///hier könnte ich das obere von EditorUI implementieren
+    private VBox vBox = new VBox();
 
     public Label type;
     public Label strasse;
@@ -22,7 +20,7 @@ public class HeaderUI extends GridPane implements ViewMixin{
     public Label anschlussLeistung;
     private Region spaceField;
 
-   public Button karte;
+    public Button karte;
 
 
     public HeaderUI(RootPM rootPM) {
@@ -62,36 +60,35 @@ public class HeaderUI extends GridPane implements ViewMixin{
         getRowConstraints().addAll(neverGrow, neverGrow, neverGrow);
 
 
-        add(type,0,0);
+        add(type, 0, 0);
         type.setId("label-id");
-        add(strasse,0,1);
-        add(plz, 0,2);
+        add(strasse, 0, 1);
+        add(plz, 0, 2);
         //ToDo, zur Zeit übereinander, wie schaffe ich abstand oder beides in eine Spalte?
-        add(ort,0,2);
+        add(ort, 0, 2);
         ort.setId("button-ort");
-        add(spaceField, 0,3,2,1);
-        add(anzahlLadepunkte,0,5);
-        add(anschlussLeistung,0,6);
+        add(spaceField, 0, 3, 2, 1);
+        add(anzahlLadepunkte, 0, 5);
+        add(anschlussLeistung, 0, 6);
 
         karte = new Button();
         karte.setMaxSize(2000, 2000);
-        add(karte, 1,1,2,7);
+        add(karte, 1, 1, 2, 7);
         karte.setId("button-karte");
 
 
     }
 
     @Override
-    public void initializeSelf(){
+    public void initializeSelf() {
         String stylesheet = getClass().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
     }
 
     @Override
-    public void setupBindings(){
+    public void setupBindings() {
         type.textProperty().bind(rootPM.getLadestationProxy().loaderTypeProperty());
         strasse.textProperty().bind(rootPM.getLadestationProxy().strasseNameProperty());
-      //  ort.textProperty().bindBidirectional(rootPM.getLadestationProxy().ortProperty());
         plz.textProperty().bind(rootPM.getLadestationProxy().PLZProperty().asString().concat("  ").concat(rootPM.getLadestationProxy().ortProperty()));
         anzahlLadepunkte.textProperty().bind(rootPM.getLadestationProxy().numberOfChargingPointsProperty().asString().concat(" Ladestation(en)"));
         anschlussLeistung.textProperty().bind(rootPM.getLadestationProxy().connectionPowerKwProperty().asString("%.2f KW"));

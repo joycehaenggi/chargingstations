@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,6 +37,10 @@ public class RootPM {
 
     private String HEADER;
 
+    //Custom Control
+    private ObservableList<LocalDate> localDates =FXCollections.observableArrayList();
+    private final ObjectProperty<LocalDate> selectedDate = new SimpleObjectProperty<>();
+
     //Counting
     private IntegerProperty count = new SimpleIntegerProperty();
     private IntegerProperty totalCount = new SimpleIntegerProperty();
@@ -56,6 +62,16 @@ public class RootPM {
         this.filteredList = new FilteredList<>(ladestationen);
 
 
+        //Custom Control
+        for(LadestationPM ladestation: ladestationen) {
+            if (!ladestation.getStartDate().isEmpty() && ladestation.getStartDate() != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+                System.out.println(ladestation.getStartDate());
+                LocalDate localDate = LocalDate.parse(ladestation.getStartDate(), formatter);
+
+                localDates.add(localDate);
+            }
+        }
         //Count
         totalCount.bind(Bindings.size(ladestationen));
         count.bind(Bindings.size(filteredList));
@@ -68,6 +84,11 @@ public class RootPM {
         selectedCountryId.addListener((observable, oldValue, newValue) -> {
             LadestationPM oldSelection = getLadestation(oldValue.intValue());
             LadestationPM newSelection = getLadestation(newValue.intValue());
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+            LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
+
+            setSelectedDate(localDate);
 
             if (oldSelection != null) {
                 unbindFromProxy(oldSelection);
@@ -463,5 +484,25 @@ public class RootPM {
 
     public void setHEADER(String HEADER) {
         this.HEADER = HEADER;
+    }
+
+    public ObservableList<LocalDate> getLocalDates() {
+        return localDates;
+    }
+
+    public void setLocalDates(ObservableList<LocalDate> localDates) {
+        this.localDates = localDates;
+    }
+
+    public LocalDate getSelectedDate() {
+        return selectedDate.get();
+    }
+
+    public ObjectProperty<LocalDate> selectedDateProperty() {
+        return selectedDate;
+    }
+
+    public void setSelectedDate(LocalDate selectedDate) {
+        this.selectedDate.set(selectedDate);
     }
 }

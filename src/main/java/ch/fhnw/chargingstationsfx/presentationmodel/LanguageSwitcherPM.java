@@ -6,11 +6,12 @@ import javafx.beans.property.StringProperty;
 
 public class LanguageSwitcherPM {
 
-    public enum Lang{
+    public enum Lang {
         DE, EN
     }
-    public enum MultilanguageText{
-       //alle Labels von LadestationPM müssen hier in DE und EN aufgeführt werden
+
+    public enum MultilanguageText {
+        //alle Labels von LadestationPM müssen hier in DE und EN aufgeführt werden
 
         GERMAN_BUTTON_TEXT("German", "Deutsch"),
         ENGLISH_BUTTON_TEXT("English", "Englisch"),
@@ -45,7 +46,7 @@ public class LanguageSwitcherPM {
         private final String germanLabel;
 
 
-        MultilanguageText(String englishLabel, String germanLablel){
+        MultilanguageText(String englishLabel, String germanLablel) {
             this.englishLabel = englishLabel;
             this.germanLabel = germanLablel;
         }
@@ -58,8 +59,8 @@ public class LanguageSwitcherPM {
             return germanLabel;
         }
 
-                public String getText(Lang lang){
-            switch(lang){
+        public String getText(Lang lang) {
+            switch (lang) {
                 case DE:
                     return getGermanLabel();
                 case EN:
@@ -100,22 +101,12 @@ public class LanguageSwitcherPM {
     private final StringProperty searchText = new SimpleStringProperty();
 
 
-
-    public LanguageSwitcherPM(){
+    public LanguageSwitcherPM() {
         setLanguage(Lang.DE);
     }
 
 
-    public String getGermanButtonText() {
-        return germanButtonText.get();
-    }
-
-    public String getEnglishButtonText() {
-        return englishButtonText.get();
-    }
-
-
-    public void setLanguage(Lang lang){
+    public void setLanguage(Lang lang) {
         setGermanButtonText(MultilanguageText.GERMAN_BUTTON_TEXT.getText(lang));
         setEnglishButtonText(MultilanguageText.ENGLISH_BUTTON_TEXT.getText(lang));
         setFirmaText(MultilanguageText.BETREIBER_TEXT.getText(lang));
@@ -145,6 +136,14 @@ public class LanguageSwitcherPM {
 
     }
 
+    //Getter und Setter
+    public String getGermanButtonText() {
+        return germanButtonText.get();
+    }
+
+    public String getEnglishButtonText() {
+        return englishButtonText.get();
+    }
 
     public StringProperty germanButtonTextProperty() {
         return germanButtonText;
@@ -222,8 +221,6 @@ public class LanguageSwitcherPM {
     public void setLatitudeText(String latitudeText) {
         this.latitudeText.set(latitudeText);
     }
-
-
 
 
     public String getLoadertypeText() {

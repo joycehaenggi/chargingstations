@@ -11,23 +11,22 @@ import ch.fhnw.chargingstationsfx.view.RootPanelUI;
 
 public class ChargingStationsApp extends Application {
 
-	@Override
-	public void start(Stage primaryStage) {
-		RootPM rootPM    = new RootPM();
-		Parent rootPanel = new RootPanelUI(rootPM);
+    @Override
+    public void start(Stage primaryStage) {
+        RootPM rootPM = new RootPM();
+        Parent rootPanel = new RootPanelUI(rootPM);
 
 
-		Scene scene = new Scene(rootPanel);
-		primaryStage.setTitle("ChargingStationsFX");
-		primaryStage.titleProperty().bind(rootPM.applicationTitleProperty());
-		primaryStage.setScene(scene);
+        Scene scene = new Scene(rootPanel);
+        primaryStage.setTitle("ChargingStationsFX");
+        primaryStage.titleProperty().bind(rootPM.applicationTitleProperty());
+        primaryStage.setScene(scene);
 
 
+        primaryStage.show();
+    }
 
-		primaryStage.show();
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

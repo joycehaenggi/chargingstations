@@ -5,6 +5,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class RootPanelUI extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
@@ -13,6 +14,8 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
     private TabelleUI overview;
     private ToolbarUI toolbar;
     private HeaderUI header;
+    private StartUpChart startUpChart;
+    private int selectedDateIndex;
 
 
     public RootPanelUI(RootPM model) {
@@ -31,6 +34,10 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
         overview = new TabelleUI(rootPM);
         toolbar = new ToolbarUI(rootPM);
         header = new HeaderUI(rootPM);
+        startUpChart = new StartUpChart(rootPM.getLocalDates());
+
+        //Anzeige Anzahl Ladestationen in einer Spalte
+        startUpChart.setStationsPerBlock(20);
 
 
     }
@@ -40,13 +47,12 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
 
 
         setTop(toolbar);
-        setCenter(new SplitPane(overview, new VBox(header,editor)));
-//(chargingStationsTable, new VBox(chargingStationsHeader, chargingStationsEditor)));
-
+        setCenter(new SplitPane(overview, new VBox(header, editor)));
+        setBottom(startUpChart);
     }
 
-//    @Override
-//    public void setupBindings() {
-//        button.textProperty().bind(rootPM.greetingProperty());
-//    }
+    @Override
+    public void setupBindings(){
+        startUpChart.selectedDateProperty().bindBidirectional(rootPM.selectedDateProperty());
+    }
 }
