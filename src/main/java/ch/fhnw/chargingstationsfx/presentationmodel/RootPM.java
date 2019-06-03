@@ -325,7 +325,7 @@ public class RootPM {
     }
 
 
-    public void add() {
+    public void addNewStation() {
         LadestationPM newChargingStation = new LadestationPM();
 
         int uniqueID = ladestationen.size() + 1;
@@ -340,6 +340,7 @@ public class RootPM {
             }
         }
         newChargingStation.setENTITY_ID(uniqueID);
+        newChargingStation.setLoaderType("Normalladeeinrichtung");
 
         ladestationen.add(newChargingStation);
 

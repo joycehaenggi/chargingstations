@@ -77,13 +77,12 @@ public class LadestationPM {
 
     public String infoAsLine(String delimiter) {
         return String.join(delimiter,
-            //    getENTITY_ID().toString(),
-                Integer.toString(getENTITY_ID()),
-                getCompanyName(),
+                getENTITY_ID().toString(),
+                 getCompanyName(),
                 getStrasseName(),
-                Integer.toString(getPLZ()),
+                getPLZ().toString(),
                 getOrt(),
-                Double.toString(getLongitude()),
+                getLongitude().toString(),
                 Double.toString(getLatitude()),
                 getStartDate(),
                 getLoaderType(),
@@ -213,7 +212,7 @@ public class LadestationPM {
         this.startDate.set(startDate);
     }
 
-    public int getENTITY_ID() {
+    public Integer getENTITY_ID() {
         return ENTITY_ID.get();
     }
 
@@ -225,7 +224,7 @@ public class LadestationPM {
         this.ENTITY_ID.set(ENTITY_ID);
     }
 
-    public int getPLZ() {
+    public Integer getPLZ() {
         return PLZ.get();
     }
 
@@ -249,7 +248,7 @@ public class LadestationPM {
         this.numberOfChargingPoints.set(numberOfChargingPoints);
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude.get();
     }
 

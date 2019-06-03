@@ -375,7 +375,7 @@ public class StartUpChart extends Region {
 
         // Add 60 labels with the time delta
         for (int i = (monthDelta - 1); i >= monthDelta - 60; i--) {
-            // Only add the numbers for full years (after all 12 months)
+            // Only addNewStation the numbers for full years (after all 12 months)
             if ((i % 12) == 0) {
                 timePeriodAxisLabels.add(createTimePeriodLabel("" + (i / 12)));
             } else {

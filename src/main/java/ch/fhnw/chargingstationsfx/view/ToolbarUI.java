@@ -96,7 +96,7 @@ public class ToolbarUI extends HBox implements ViewMixin {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                rootPM.add();
+                rootPM.addNewStation();
             }
         });
         deleteButton.setOnAction(event -> {
