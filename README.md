@@ -3,12 +3,9 @@
 ## Bearbeitet von
  - Joyce Hänggi
  
-##Custom Control von
- - Linus Kohler
- - Manuel Riedi
- 
- - Sandro Osswald
- - Cedric Bühler
+## Custom Control von
+ - Linus Kohler & Manuel Riedi
+  - Sandro Osswald & Cedric Bühler
 
 ## Abgabe
 - Mittwoch, 5.6.2019, 18:00 Uhr
