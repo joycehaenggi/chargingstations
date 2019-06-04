@@ -88,8 +88,8 @@ public class ToolbarUI extends HBox implements ViewMixin {
             }
         });
 
-        addButton.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    addButton.setOnAction(event -> {
+           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Änderungen speichern");
             alert.setHeaderText(null);
             alert.setContentText("Möchten Sie eine neue Ladestation hinzufügen?");

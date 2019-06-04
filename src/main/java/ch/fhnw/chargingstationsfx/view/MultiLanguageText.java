@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+
 public class MultiLanguageText extends GridPane implements ViewMixin {
     private final LanguageSwitcherPM languageSwitcherPM;
     private final LadestationPM ladestationPM;

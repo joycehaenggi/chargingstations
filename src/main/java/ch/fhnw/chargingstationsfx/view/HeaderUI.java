@@ -64,7 +64,6 @@ public class HeaderUI extends GridPane implements ViewMixin {
         type.setId("label-id");
         add(strasse, 0, 1);
         add(plz, 0, 2);
-        //ToDo, zur Zeit übereinander, wie schaffe ich abstand oder beides in eine Spalte?
         add(ort, 0, 2);
         ort.setId("button-ort");
         add(spaceField, 0, 3, 2, 1);

@@ -38,7 +38,7 @@ public class RootPM {
     private String HEADER;
 
     //Custom Control
-    private ObservableList<LocalDate> localDates =FXCollections.observableArrayList();
+    private ObservableList<LocalDate> localDates = FXCollections.observableArrayList();
     private final ObjectProperty<LocalDate> selectedDate = new SimpleObjectProperty<>();
 
     //Counting
@@ -51,7 +51,7 @@ public class RootPM {
     private final BooleanProperty undoDisabled = new SimpleBooleanProperty();
     private final BooleanProperty redoDisabled = new SimpleBooleanProperty();
 
-    //Todo ChangeListener
+
     private final ChangeListener propertyChangeListenerForUndoSupport = (observable, oldValue, newValue) -> {
         redoStack.clear();
         undoStack.add(0, new ValueChangeCommand(this, (Property) observable, oldValue, newValue));
@@ -62,8 +62,10 @@ public class RootPM {
         this.filteredList = new FilteredList<>(ladestationen);
 
 
+        //TODO SAVE GEHT NICHT MEHR
+
         //Custom Control
-        for(LadestationPM ladestation: ladestationen) {
+        for (LadestationPM ladestation : ladestationen) {
             if (!ladestation.getStartDate().isEmpty() && ladestation.getStartDate() != null) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
                 //Ausgabe der Daten auf Konsole
@@ -86,8 +88,10 @@ public class RootPM {
             LadestationPM oldSelection = getLadestation(oldValue.intValue());
             LadestationPM newSelection = getLadestation(newValue.intValue());
 
+            //TODO Durch diese 3 Zeilen funktioniert Hinzufügen nicht mehr ohne NullPointer Exception
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
             LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
+
 
             setSelectedDate(localDate);
 
@@ -101,9 +105,9 @@ public class RootPM {
             }
             undoStack.clear();
             redoStack.clear();
-        });
+    });
 
-    }
+}
 
     <T> void setPropertyChangeListenerForUndoSupport(Property<T> property, T newValue) {
         property.removeListener(propertyChangeListenerForUndoSupport);
@@ -244,13 +248,14 @@ public class RootPM {
         //um etwas herauslesen zu können --> bufferedReader
         try (BufferedReader reader = getReader(FILE_NAME)) {
             //1. Zeile muss übersprungen werden, da hier keine Wahlergebnisse ausgegeben werden
+            HEADER = reader.readLine();
             return reader.lines()
-                    .skip(1)
+                    //.skip(1)
                     // ich kriege eine Zeile ein und aus dieser Zeile mache ich eine neue Instanz von LadestationPM
                     //von einem grossen String ein Array von String machen mittels .split
                     //Parameter 2 ist Anzahl der Kolonnen / Spalten -> muss man jedoch nicht umebdingt schreiben
-                    .map(line -> new LadestationPM(line.split(DELIMITER, 22)))
-                    .collect(Collectors.toList());
+                    .map(line -> new LadestationPM(line.split(DELIMITER))).collect(Collectors.toList());
+            //.collect(Collectors.toList());
         }
 
         //IO Exception sind Programmierfehler
@@ -299,8 +304,8 @@ public class RootPM {
 
 
     public void save() {
-        try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))){
-            writer.write("ENTITY_ID;OPERATING_COMPANY;ADDRESS;ZIP_CODE;CITY;LONGITUDE;LATITUDE;START_UP_DATE;LOADER_TYPE;NUMBER_OF_CHARGING_POINTS;CONNECTION_POWER_KW;PLUG_TYPES_1;POWER_1_KW;PLUG_TYPES_2;POWER_2_KW;PLUG_TYPES_3;POWER_3_KW;PLUG_TYPES_4;POWER_4_KW");
+        try (BufferedWriter writer = getWriter(FILE_NAME)) {
+            writer.write(HEADER);
             writer.newLine();
             ladestationen.stream()
                     .map(allLocations -> allLocations.infoAsLine(DELIMITER))
@@ -319,8 +324,8 @@ public class RootPM {
 
 
     public void delete() {
-        ladestationen.remove(getLadestation(selectedCountryIdProperty().get()));
-
+        // ladestationen.remove(getLadestation(selectedCountryIdProperty().get()));
+        ladestationen.remove(ladestationen.indexOf(getLadestation(selectedCountryId.intValue())));
 
     }
 
@@ -340,23 +345,23 @@ public class RootPM {
             }
         }
         newChargingStation.setENTITY_ID(uniqueID);
+        //Default setzten beim Hinzufügen neuer Station
         newChargingStation.setLoaderType("Normalladeeinrichtung");
 
         ladestationen.add(newChargingStation);
-
         setSelectedCountryId(uniqueID);
 
     }
 
     public void filter(String text) {
-        if(text!=null){
+        if (text != null) {
             //Filter auf Strasse
             Predicate<LadestationPM> strassePredicate = ladestationen -> ladestationen.getStrasseName().contains(text);
             Predicate<LadestationPM> ortPredicate = ladestationen -> ladestationen.getOrt().contains(text);
             Predicate<LadestationPM> PLZPredicate = ladestationen -> Integer.toString(ladestationen.getPLZ()).contains(text);
             Predicate<LadestationPM> numberOfCharginPointsPredicate = ladestationen -> Integer.toString(ladestationen.getNumberOfChargingPoints()).contains(text);
             filteredList.setPredicate(strassePredicate.or(ortPredicate).or(PLZPredicate).or(numberOfCharginPointsPredicate));
-        }else{
+        } else {
             filteredList.setPredicate(null);
         }
 

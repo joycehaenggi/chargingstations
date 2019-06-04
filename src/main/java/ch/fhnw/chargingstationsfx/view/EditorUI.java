@@ -151,17 +151,14 @@ public class EditorUI extends GridPane implements ViewMixin {
         add(plugType4Label, 0, 16);
         add(power4KwLabel, 2, 16);
 
-
-        //ToDo muss über mehrere Spalte gehen
         add(betreiberTextField, 1, 7, 3, 1);
-        //ToDo muss über mehrere Spalte gehen
         add(strasseTextField, 1, 8, 3, 1);
         add(PLZTextField, 1, 9);
         add(ortTextField, 3, 9);
         add(longitudeTextField, 1, 10);
         add(latitudeTextField, 3, 10);
         add(inbetriebnahmeTextField, 1, 11);
-       add(typeSwitch, 3, 11);
+        add(typeSwitch, 3, 11);
         add(numberOfChargingPointsTextField, 1, 12);
         add(connectionPowerKwTextField, 3, 12);
         add(plugType1TextField, 1, 13);
@@ -309,8 +306,7 @@ public class EditorUI extends GridPane implements ViewMixin {
 
         numberOfChargingPointsTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-                    //todo wenn ich delete klicke, kommt fehlermeldung
-                    if (newValue == null || newValue.equals("")) {
+                       if (newValue == null || newValue.equals("")) {
                         plugType1Label.setVisible(false);
                         plugType1TextField.setVisible(false);
                         power1KwLabel.setVisible(false);
