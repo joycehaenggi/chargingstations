@@ -62,8 +62,6 @@ public class RootPM {
         this.filteredList = new FilteredList<>(ladestationen);
 
 
-        //TODO SAVE GEHT NICHT MEHR
-
         //Custom Control
         for (LadestationPM ladestation : ladestationen) {
             if (!ladestation.getStartDate().isEmpty() && ladestation.getStartDate() != null) {
@@ -89,11 +87,9 @@ public class RootPM {
             LadestationPM newSelection = getLadestation(newValue.intValue());
 
             //TODO Durch diese 3 Zeilen funktioniert Hinzufügen nicht mehr ohne NullPointer Exception
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
-            LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
-
-
-            setSelectedDate(localDate);
+            //   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+            //     LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
+            //     setSelectedDate(localDate);
 
             if (oldSelection != null) {
                 unbindFromProxy(oldSelection);
@@ -105,9 +101,9 @@ public class RootPM {
             }
             undoStack.clear();
             redoStack.clear();
-    });
+        });
 
-}
+    }
 
     <T> void setPropertyChangeListenerForUndoSupport(Property<T> property, T newValue) {
         property.removeListener(propertyChangeListenerForUndoSupport);
