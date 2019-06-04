@@ -40,7 +40,7 @@ public class TypeSwitch extends Region {
 
     private static final double MAXIMUM_WIDTH = 600;
 
-    private static final Color BUTTON_ON = Color.rgb(200, 0 , 0);
+    private static final Color BUTTON_ON = Color.rgb(60,127,177);
     private static final Color BUTTON_OFF = Color.rgb(255, 208, 0);
 
     private static final String fast = "Schnellladeeinrichtung";
@@ -49,7 +49,7 @@ public class TypeSwitch extends Region {
     private Color barColor1 = Color.rgb(255, 220, 0, 0.7);
     private Color barColor2 = Color.rgb(250, 250, 0, 0.6);
     private Color barColor3 = Color.rgb(250, 250, 0, 0.4);
-    private Color textColor = Color.rgb(255, 255, 255);
+    private Color textColor = Color.rgb(0,0,0);
 
     private Timeline timeline = new Timeline();
     private Timeline timeline2 = new Timeline();
@@ -86,7 +86,7 @@ public class TypeSwitch extends Region {
     }
 
     private void initializeSelf() {
-        String stylesheet = getClass().getResource("typeSwitch.css").toExternalForm();
+        String stylesheet = getClass().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
 
         getStyleClass().add("toggleSwitch");
@@ -163,10 +163,10 @@ public class TypeSwitch extends Region {
 
 
             }else {
-                barColor1 = Color.rgb(255, 0, 0, 0.7);
-                barColor2 = Color.rgb(250, 0, 0, 0.6);
-                barColor3 = Color.rgb(250, 50, 0, 0.6);
-                textColor = Color.rgb(255, 255, 255);
+                barColor1 = Color.rgb(60,127,177,0.7);
+                barColor2 = Color.rgb(190, 230, 253, 0.6);
+                barColor3 = Color.rgb(190, 230, 253, 0.6);
+                textColor = Color.rgb(0, 0, 0);
                 buttonMoveValue = new KeyValue(button.xProperty(), ARTBOARD_WIDTH -(ARTBOARD_WIDTH/3.5));
                 buttonColorValue = new KeyValue(button.fillProperty(), BUTTON_ON);
                 textColorValue = new KeyValue(text.fillProperty(), textColor);

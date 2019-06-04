@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 import java.util.Optional;
 
 
-public class ToolbarUI extends HBox implements ViewMixin {
+public class Toolbar extends HBox implements ViewMixin {
 
 
     private final RootPM rootPM;
@@ -30,7 +30,7 @@ public class ToolbarUI extends HBox implements ViewMixin {
     private Region spaceField;
 
 
-    public ToolbarUI(RootPM rootPM) {
+    public Toolbar(RootPM rootPM) {
         this.rootPM = rootPM;
         languageSwitcherPM = rootPM.getLanguageSwitcherPM();
         init();
@@ -123,7 +123,7 @@ public class ToolbarUI extends HBox implements ViewMixin {
 
     @Override
     public void setupBindings() {
-        // Binding EditorUI MultiLanguage
+        // Binding Editor MultiLanguage
 
         addButton.textProperty().bind(rootPM.getLanguageSwitcherPM().addTextProperty());
         deleteButton.textProperty().bind(rootPM.getLanguageSwitcherPM().deleteTextProperty());

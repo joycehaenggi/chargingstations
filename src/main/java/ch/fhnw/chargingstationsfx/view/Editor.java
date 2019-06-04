@@ -13,7 +13,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.util.converter.NumberStringConverter;
 
 
-public class EditorUI extends GridPane implements ViewMixin {
+public class Editor extends GridPane implements ViewMixin {
     private final RootPM rootPM;
 
 
@@ -60,7 +60,7 @@ public class EditorUI extends GridPane implements ViewMixin {
     public TextField power4Kw;
 
 
-    public EditorUI(RootPM rootPM) {
+    public Editor(RootPM rootPM) {
         this.rootPM = rootPM;
         init();
     }
@@ -182,7 +182,7 @@ public class EditorUI extends GridPane implements ViewMixin {
 
     @Override
     public void setupBindings() {
-        // Binding EditorUI MultiLanguage
+        // Binding Editor MultiLanguage
         betreiberLabel.textProperty().bind(rootPM.getLanguageSwitcherPM().firmaTextProperty());
         strasseLabel.textProperty().bind(rootPM.getLanguageSwitcherPM().strasseTextProperty());
         ortLabel.textProperty().bind(rootPM.getLanguageSwitcherPM().ortTextProperty());
@@ -202,7 +202,7 @@ public class EditorUI extends GridPane implements ViewMixin {
         plugType4Label.textProperty().bind(rootPM.getLanguageSwitcherPM().plugtype4TextProperty());
         power4KwLabel.textProperty().bind(rootPM.getLanguageSwitcherPM().power4KWTextProperty());
 
-        // Binding EditorUI TabelleUI
+        // Binding Editor Tabelle
         betreiberTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().companyNameProperty());
         strasseTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().strasseNameProperty());
         PLZTextField.textProperty().bindBidirectional(rootPM.getLadestationProxy().PLZProperty(), new NumberStringConverter("####"));

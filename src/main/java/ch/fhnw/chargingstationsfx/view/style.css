@@ -41,6 +41,8 @@
     -fx-font-weight: bold;
     -fx-font-size: 15px;
 }
+
+/*Styling für StartUpChart*/
 .start-up-control {
     -selection-color: #3c7fb1;
     -station-color: rgba(83, 172, 255, 0.44);
@@ -80,4 +82,23 @@
 
 .start-up-control .selected-fill-level-bar {
     -fx-fill: -selection-color;
+}
+/*Styling für TypeSwitch*/
+.toggleSwitch .button {
+    -fx-arc-height: 50;
+    -fx-arc-width : 50;
+}
+
+.toggleSwitch .bar {
+    -fx-arc-height: 50;
+    -fx-arc-width : 50;
+}
+
+.toggleSwitch .display {
+    -fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    -fx-font-weight: Bold;
+    /*-fx-fill: slategray;*/
+    -fx-font-size: 20pt;
+
+
 }

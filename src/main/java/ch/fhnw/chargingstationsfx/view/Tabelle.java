@@ -2,32 +2,28 @@ package ch.fhnw.chargingstationsfx.view;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.LadestationPM;
 import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-import java.time.LocalDate;
 
 
-public class TabelleUI extends VBox implements ViewMixin {
+public class Tabelle extends VBox implements ViewMixin {
 
 
     private final RootPM rootPM;
     private TableView<LadestationPM> tabelle;
     private Label counter;
-    private SelectionModel<LocalDate> selectionModel;
-    private int selectedDateIndex;
 
 
-    public TabelleUI(RootPM rootPM) {
+
+    public Tabelle(RootPM rootPM) {
         this.rootPM = rootPM;
         init();
+        tabelle.getSelectionModel().selectFirst();
     }
 
 
@@ -88,18 +84,5 @@ public class TabelleUI extends VBox implements ViewMixin {
                 .concat(rootPM.totalCountProperty().asString()));
 
     }
-
-    public RootPM getRootPM() {
-        return rootPM;
-    }
-
-    public TableView<LadestationPM> getTabelle() {
-        return tabelle;
-    }
-
-    public void setTabelle(TableView<LadestationPM> tabelle) {
-        this.tabelle = tabelle;
-    }
-
 
 }

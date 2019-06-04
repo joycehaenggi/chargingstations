@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class HeaderUI extends GridPane implements ViewMixin {
+public class Header extends GridPane implements ViewMixin {
     private final RootPM rootPM;
     private VBox vBox = new VBox();
 
@@ -23,7 +23,7 @@ public class HeaderUI extends GridPane implements ViewMixin {
     public Button karte;
 
 
-    public HeaderUI(RootPM rootPM) {
+    public Header(RootPM rootPM) {
         this.rootPM = rootPM;
         init();
     }

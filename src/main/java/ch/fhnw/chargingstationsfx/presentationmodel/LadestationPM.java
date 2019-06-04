@@ -102,8 +102,6 @@ public class LadestationPM {
     }
 
     //getters and setters
-
-
     public String getCompanyName() {
         return companyName.get();
     }
@@ -214,10 +212,6 @@ public class LadestationPM {
 
     public Integer getENTITY_ID() {
         return ENTITY_ID.get();
-    }
-
-    public IntegerProperty ENTITY_IDProperty() {
-        return ENTITY_ID;
     }
 
     public void setENTITY_ID(int ENTITY_ID) {

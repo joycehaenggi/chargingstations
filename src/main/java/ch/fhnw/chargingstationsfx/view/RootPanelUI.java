@@ -5,15 +5,13 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class RootPanelUI extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
-    private SplitPane splitPane = new SplitPane();
-    private EditorUI editor;
-    private TabelleUI overview;
-    private ToolbarUI toolbar;
-    private HeaderUI header;
+    private Editor editor;
+    private Tabelle overview;
+    private Toolbar toolbar;
+    private Header header;
     private StartUpChart startUpChart;
     private int selectedDateIndex;
 
@@ -30,10 +28,10 @@ public class RootPanelUI extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        editor = new EditorUI(rootPM);
-        overview = new TabelleUI(rootPM);
-        toolbar = new ToolbarUI(rootPM);
-        header = new HeaderUI(rootPM);
+        editor = new Editor(rootPM);
+        overview = new Tabelle(rootPM);
+        toolbar = new Toolbar(rootPM);
+        header = new Header(rootPM);
         startUpChart = new StartUpChart(rootPM.getLocalDates());
 
         //Anzeige Anzahl Ladestationen in einer Spalte

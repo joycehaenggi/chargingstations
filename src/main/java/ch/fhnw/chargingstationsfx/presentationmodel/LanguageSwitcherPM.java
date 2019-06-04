@@ -34,7 +34,7 @@ public class LanguageSwitcherPM {
         PLUGTYPE4_TEXT("Plug Typ 4", "4-Steckertypen"),
         POWER4KW_TEXT("Power 4 [kW]", "Leistung [kW]"),
 
-        //HeaderUI
+        //Header
         ADD_TEXT("Add", "Hinzufügen"),
         DELETE_TEXT("Delete", "Löschen"),
         SAVE_TEXT("Save", "Speichern"),
@@ -92,7 +92,7 @@ public class LanguageSwitcherPM {
     private final StringProperty plugtype4Text = new SimpleStringProperty();
     private final StringProperty power4KWText = new SimpleStringProperty();
 
-    //HeaderUI
+    //Header
     private final StringProperty addText = new SimpleStringProperty();
     private final StringProperty deleteText = new SimpleStringProperty();
     private final StringProperty saveText = new SimpleStringProperty();
@@ -162,10 +162,6 @@ public class LanguageSwitcherPM {
         this.englishButtonText.set(englishButtonText);
     }
 
-    public String getFirmaText() {
-        return firmaText.get();
-    }
-
     public StringProperty firmaTextProperty() {
         return firmaText;
     }
@@ -174,9 +170,6 @@ public class LanguageSwitcherPM {
         this.firmaText.set(firmaText);
     }
 
-    public String getStrasseText() {
-        return strasseText.get();
-    }
 
     public StringProperty strasseTextProperty() {
         return strasseText;
@@ -186,9 +179,6 @@ public class LanguageSwitcherPM {
         this.strasseText.set(strasseText);
     }
 
-    public String getOrtText() {
-        return ortText.get();
-    }
 
     public StringProperty ortTextProperty() {
         return ortText;
@@ -198,9 +188,6 @@ public class LanguageSwitcherPM {
         this.ortText.set(ortText);
     }
 
-    public String getLongitudeText() {
-        return longitudeText.get();
-    }
 
     public StringProperty longitudeTextProperty() {
         return longitudeText;
@@ -210,9 +197,6 @@ public class LanguageSwitcherPM {
         this.longitudeText.set(longitudeText);
     }
 
-    public String getLatitudeText() {
-        return latitudeText.get();
-    }
 
     public StringProperty latitudeTextProperty() {
         return latitudeText;
@@ -223,10 +207,6 @@ public class LanguageSwitcherPM {
     }
 
 
-    public String getLoadertypeText() {
-        return loadertypeText.get();
-    }
-
     public StringProperty loadertypeTextProperty() {
         return loadertypeText;
     }
@@ -235,9 +215,6 @@ public class LanguageSwitcherPM {
         this.loadertypeText.set(loadertypeText);
     }
 
-    public String getNumberOfChargingPointsText() {
-        return numberOfChargingPointsText.get();
-    }
 
     public StringProperty numberOfChargingPointsTextProperty() {
         return numberOfChargingPointsText;
@@ -247,9 +224,6 @@ public class LanguageSwitcherPM {
         this.numberOfChargingPointsText.set(numberOfChargingPointsText);
     }
 
-    public String getConnectionPowerKWText() {
-        return connectionPowerKWText.get();
-    }
 
     public StringProperty connectionPowerKWTextProperty() {
         return connectionPowerKWText;
@@ -259,9 +233,6 @@ public class LanguageSwitcherPM {
         this.connectionPowerKWText.set(connectionPowerKWText);
     }
 
-    public String getPlugtype1Text() {
-        return plugtype1Text.get();
-    }
 
     public StringProperty plugtype1TextProperty() {
         return plugtype1Text;
@@ -271,9 +242,6 @@ public class LanguageSwitcherPM {
         this.plugtype1Text.set(plugtype1Text);
     }
 
-    public String getPower1KWText() {
-        return power1KWText.get();
-    }
 
     public StringProperty power1KWTextProperty() {
         return power1KWText;
@@ -283,9 +251,6 @@ public class LanguageSwitcherPM {
         this.power1KWText.set(power1KWText);
     }
 
-    public String getPlugtype2Text() {
-        return plugtype2Text.get();
-    }
 
     public StringProperty plugtype2TextProperty() {
         return plugtype2Text;
@@ -295,9 +260,6 @@ public class LanguageSwitcherPM {
         this.plugtype2Text.set(plugtype2Text);
     }
 
-    public String getPower2KWText() {
-        return power2KWText.get();
-    }
 
     public StringProperty power2KWTextProperty() {
         return power2KWText;
@@ -307,9 +269,6 @@ public class LanguageSwitcherPM {
         this.power2KWText.set(power2KWText);
     }
 
-    public String getPlugtype3Text() {
-        return plugtype3Text.get();
-    }
 
     public StringProperty plugtype3TextProperty() {
         return plugtype3Text;
@@ -319,9 +278,6 @@ public class LanguageSwitcherPM {
         this.plugtype3Text.set(plugtype3Text);
     }
 
-    public String getPower3KWText() {
-        return power3KWText.get();
-    }
 
     public StringProperty power3KWTextProperty() {
         return power3KWText;
@@ -331,9 +287,6 @@ public class LanguageSwitcherPM {
         this.power3KWText.set(power3KWText);
     }
 
-    public String getPlugtype4Text() {
-        return plugtype4Text.get();
-    }
 
     public StringProperty plugtype4TextProperty() {
         return plugtype4Text;
@@ -343,9 +296,6 @@ public class LanguageSwitcherPM {
         this.plugtype4Text.set(plugtype4Text);
     }
 
-    public String getPower4KWText() {
-        return power4KWText.get();
-    }
 
     public StringProperty power4KWTextProperty() {
         return power4KWText;
@@ -355,9 +305,6 @@ public class LanguageSwitcherPM {
         this.power4KWText.set(power4KWText);
     }
 
-    public String getPLZText() {
-        return PLZText.get();
-    }
 
     public StringProperty PLZTextProperty() {
         return PLZText;
@@ -367,9 +314,6 @@ public class LanguageSwitcherPM {
         this.PLZText.set(PLZText);
     }
 
-    public String getInbetriebnahmeText() {
-        return inbetriebnahmeText.get();
-    }
 
     public StringProperty inbetriebnahmeTextProperty() {
         return inbetriebnahmeText;
@@ -379,9 +323,6 @@ public class LanguageSwitcherPM {
         this.inbetriebnahmeText.set(inbetriebnahmeText);
     }
 
-    public String getAddText() {
-        return addText.get();
-    }
 
     public StringProperty addTextProperty() {
         return addText;
@@ -391,9 +332,6 @@ public class LanguageSwitcherPM {
         this.addText.set(addText);
     }
 
-    public String getDeleteText() {
-        return deleteText.get();
-    }
 
     public StringProperty deleteTextProperty() {
         return deleteText;
@@ -403,9 +341,6 @@ public class LanguageSwitcherPM {
         this.deleteText.set(deleteText);
     }
 
-    public String getSaveText() {
-        return saveText.get();
-    }
 
     public StringProperty saveTextProperty() {
         return saveText;
@@ -415,9 +350,6 @@ public class LanguageSwitcherPM {
         this.saveText.set(saveText);
     }
 
-    public String getRedoText() {
-        return redoText.get();
-    }
 
     public StringProperty redoTextProperty() {
         return redoText;
@@ -427,9 +359,6 @@ public class LanguageSwitcherPM {
         this.redoText.set(redoText);
     }
 
-    public String getUndoText() {
-        return undoText.get();
-    }
 
     public StringProperty undoTextProperty() {
         return undoText;
@@ -439,9 +368,6 @@ public class LanguageSwitcherPM {
         this.undoText.set(undoText);
     }
 
-    public String getSearchText() {
-        return searchText.get();
-    }
 
     public StringProperty searchTextProperty() {
         return searchText;

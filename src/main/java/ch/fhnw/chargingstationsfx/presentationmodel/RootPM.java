@@ -86,10 +86,10 @@ public class RootPM {
             LadestationPM oldSelection = getLadestation(oldValue.intValue());
             LadestationPM newSelection = getLadestation(newValue.intValue());
 
-            //TODO Durch diese 3 Zeilen funktioniert Hinzufügen nicht mehr ohne NullPointer Exception
-            //   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
-            //     LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
-            //     setSelectedDate(localDate);
+               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+                LocalDate localDate = LocalDate.parse(newSelection.getStartDate(), formatter);
+
+                 setSelectedDate(localDate);
 
             if (oldSelection != null) {
                 unbindFromProxy(oldSelection);
@@ -342,7 +342,8 @@ public class RootPM {
         }
         newChargingStation.setENTITY_ID(uniqueID);
         //Default setzten beim Hinzufügen neuer Station
-        newChargingStation.setLoaderType("Normalladeeinrichtung");
+        newChargingStation.setLoaderType("Schnellladeeinrichtung");
+        newChargingStation.setStartDate("15.12.18");
 
         ladestationen.add(newChargingStation);
         setSelectedCountryId(uniqueID);
@@ -368,40 +369,12 @@ public class RootPM {
     //Setter und Getter
 
 
-    public static String getFileName() {
-        return FILE_NAME;
-    }
-
-    public static String getDELIMITER() {
-        return DELIMITER;
-    }
-
-    public String getApplicationTitle() {
-        return applicationTitle.get();
-    }
-
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
     }
 
-    public void setApplicationTitle(String applicationTitle) {
-        this.applicationTitle.set(applicationTitle);
-    }
-
-    public int getSelectedCountryId() {
-        return selectedCountryId.get();
-    }
-
-    public IntegerProperty selectedCountryIdProperty() {
-        return selectedCountryId;
-    }
-
     public void setSelectedCountryId(int selectedCountryId) {
         this.selectedCountryId.set(selectedCountryId);
-    }
-
-    public ObservableList<LadestationPM> getLadestationen() {
-        return ladestationen;
     }
 
     public LadestationPM getProxy() {
@@ -412,40 +385,13 @@ public class RootPM {
         return languageSwitcherPM;
     }
 
-    public ObservableList<Command> getUndoStack() {
-        return undoStack;
-    }
-
-    public ObservableList<Command> getRedoStack() {
-        return redoStack;
-    }
-
-    public boolean isUndoDisabled() {
-        return undoDisabled.get();
-    }
 
     public BooleanProperty undoDisabledProperty() {
         return undoDisabled;
     }
 
-    public void setUndoDisabled(boolean undoDisabled) {
-        this.undoDisabled.set(undoDisabled);
-    }
-
-    public boolean isRedoDisabled() {
-        return redoDisabled.get();
-    }
-
     public BooleanProperty redoDisabledProperty() {
         return redoDisabled;
-    }
-
-    public void setRedoDisabled(boolean redoDisabled) {
-        this.redoDisabled.set(redoDisabled);
-    }
-
-    public ChangeListener getPropertyChangeListenerForUndoSupport() {
-        return propertyChangeListenerForUndoSupport;
     }
 
 
@@ -453,53 +399,20 @@ public class RootPM {
         return filteredList;
     }
 
-    public void setFilteredList(FilteredList<LadestationPM> filteredList) {
-        this.filteredList = filteredList;
-    }
-
-    public int getCount() {
-        return count.get();
-    }
 
     public IntegerProperty countProperty() {
         return count;
     }
 
-    public void setCount(int count) {
-        this.count.set(count);
-    }
-
-    public int getTotalCount() {
-        return totalCount.get();
-    }
 
     public IntegerProperty totalCountProperty() {
         return totalCount;
-    }
-
-    public void setTotalCount(int totalCount) {
-        this.totalCount.set(totalCount);
-    }
-
-    public String getHEADER() {
-        return HEADER;
-    }
-
-    public void setHEADER(String HEADER) {
-        this.HEADER = HEADER;
     }
 
     public ObservableList<LocalDate> getLocalDates() {
         return localDates;
     }
 
-    public void setLocalDates(ObservableList<LocalDate> localDates) {
-        this.localDates = localDates;
-    }
-
-    public LocalDate getSelectedDate() {
-        return selectedDate.get();
-    }
 
     public ObjectProperty<LocalDate> selectedDateProperty() {
         return selectedDate;
