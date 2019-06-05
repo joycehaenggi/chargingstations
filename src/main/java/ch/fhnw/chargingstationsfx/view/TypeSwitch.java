@@ -46,7 +46,7 @@ public class TypeSwitch extends Region {
     private static final String fast = "Schnellladeeinrichtung";
     private static final String normal = "Normalladeeinrichtung";
 
-    private Color barColor1 = Color.rgb(255, 220, 0, 0.7);
+    private Color barColor1 = Color.rgb(250, 220, 0, 0.7);
     private Color barColor2 = Color.rgb(250, 250, 0, 0.6);
     private Color barColor3 = Color.rgb(250, 250, 0, 0.4);
     private Color textColor = Color.rgb(0,0,0);
